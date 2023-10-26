@@ -18,16 +18,41 @@ public class FabriqueCartes {
         return new PaquetDeCartes();
     }
 
-    public PaquetDeCartes getPaquet1Vert(){
+    public PaquetDeCartes getPaquetEntier(){
         PaquetDeCartes paquet = new PaquetDeCartes();
-        paquet.ajouter(new Carte(1, Couleur.VERT));
-        return paquet;
-    }
-
-    public PaquetDeCartes getPaquet5Vert(){
-        PaquetDeCartes paquet = new PaquetDeCartes();
-        for (int i = 0; i < 5; i++) {
-            paquet.ajouter(new Carte(i + 1, Couleur.VERT));
+        Uno u = new Uno();
+        paquet.ajouter(new Chiffre(u, Couleur.BLEU, 0));
+        paquet.ajouter(new Chiffre(u, Couleur.JAUNE, 0));
+        paquet.ajouter(new Chiffre(u, Couleur.ROUGE, 0));
+        paquet.ajouter(new Chiffre(u, Couleur.VERT, 0));
+        for (int i = 1; i < 10; i++) {
+            paquet.ajouter(new Chiffre(u, Couleur.BLEU, i));
+            paquet.ajouter(new Chiffre(u, Couleur.JAUNE, i));
+            paquet.ajouter(new Chiffre(u, Couleur.ROUGE, i));
+            paquet.ajouter(new Chiffre(u, Couleur.VERT, i));
+        }
+        for (int i = 0; i < 2; i ++){
+            // 2 cartes +2 de chaque couleur
+            paquet.ajouter(new Plus2(u, Couleur.BLEU));
+            paquet.ajouter(new Plus2(u, Couleur.JAUNE));
+            paquet.ajouter(new Plus2(u, Couleur.ROUGE));
+            paquet.ajouter(new Plus2(u, Couleur.VERT));
+            // 2 cartes passe ton tour de chaque couleur
+            paquet.ajouter(new PasseTonTour(u, Couleur.BLEU));
+            paquet.ajouter(new PasseTonTour(u, Couleur.JAUNE));
+            paquet.ajouter(new PasseTonTour(u, Couleur.ROUGE));
+            paquet.ajouter(new PasseTonTour(u, Couleur.VERT));
+            // 2 cartes changement de sens de chaque couleur
+            paquet.ajouter(new ChangementDeSens(u, Couleur.BLEU));
+            paquet.ajouter(new ChangementDeSens(u, Couleur.JAUNE));
+            paquet.ajouter(new ChangementDeSens(u, Couleur.ROUGE));
+            paquet.ajouter(new ChangementDeSens(u, Couleur.VERT));
+        }
+        for (int i = 0; i < 5){
+            // 4 cartes joker
+            paquet.ajouter(new Joker(u));
+            // 4 cartes +4
+            paquet.ajouter(new Plus4(u));
         }
         return paquet;
     }
