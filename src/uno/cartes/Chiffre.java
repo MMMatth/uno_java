@@ -1,4 +1,6 @@
 package uno.cartes;
+import uno.jeu.Uno;
+
 
 public class Chiffre extends Carte{
     private  int valeur;

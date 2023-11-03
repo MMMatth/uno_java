@@ -1,19 +1,23 @@
 package uno.cartes;
+import uno.jeu.Uno;
+
 
 public class Plus4 extends Carte {
     public Plus4(Uno u) {
         super(u);
     }
     public int getValeur() {
-        return 0;
+        return 50;
     }
     public boolean peutEtreRecouvertePar(Carte c) {
         return c.peutEtrePoseeSur(this);
     }
     public Couleur getCouleur() {
-        return null;
+        return couleur;
     }
-    public void setCouleur(Couleur c) {}
+    public void setCouleur(Couleur c) {
+        couleur = c;
+    }
     public boolean estSansCouleur() {
         return true;
     }

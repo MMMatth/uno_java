@@ -1,11 +1,13 @@
 package uno.cartes;
+import uno.cartes.Couleur;
+import uno.jeu.Uno;
 
 public class ChangementDeSens extends Carte{
     public ChangementDeSens(Uno u, Couleur c){
         super(u, c);
     }
     public int getValeur(){
-        return 0;
+        return 20;
     }
     public boolean peutEtreRecouvertePar(Carte c){
         return c.peutEtrePoseeSur(this);

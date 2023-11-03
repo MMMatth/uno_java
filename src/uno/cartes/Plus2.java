@@ -1,9 +1,11 @@
 package uno.cartes;
+import uno.jeu.Uno;
+
 
 public class Plus2 extends Carte{
     @Override
     public int getValeur() {
-        return 0;
+        return 20;
     }
 
     public Plus2(Uno u, Couleur c){

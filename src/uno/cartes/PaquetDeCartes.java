@@ -1,4 +1,6 @@
 package uno.cartes;
+import uno.jeu.Uno;
+
 
 import java.util.ArrayList;
 import java.util.Collections;

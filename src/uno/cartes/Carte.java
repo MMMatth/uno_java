@@ -1,8 +1,9 @@
 package uno.cartes;
+import uno.jeu.Uno;
 
 public abstract class Carte {
-    private Uno u;
-    private Couleur couleur;
+    protected Uno u;
+    protected Couleur couleur;
     public  Carte(Uno u){
         this.u = u;
     }

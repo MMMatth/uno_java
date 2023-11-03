@@ -1,4 +1,5 @@
 package uno.cartes;
+import uno.jeu.Uno;
 
 public class Joker extends Carte {
     public  Joker(Uno u) {
@@ -6,7 +7,7 @@ public class Joker extends Carte {
         this.couleur = null;
     }
     public int getValeur() {
-        return 0;
+        return 50;
     }
     public boolean peutEtreRecouvertePar(Carte c) {
         return c.peutEtrePoseeSur(this);
