@@ -18,4 +18,7 @@ public enum Couleur {
     public String toString(){
         return nom;
     }
+    boolean isColor(String color){
+        return color == nom;
+    }
 }
