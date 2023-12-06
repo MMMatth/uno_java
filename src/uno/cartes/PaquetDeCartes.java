@@ -6,14 +6,30 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.io.PrintWriter;
 import java.io.File;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Iterator;
 
-public class PaquetDeCartes {
-
+public class PaquetDeCartes implements Iterator<Carte>{
     private ArrayList<Carte> paquet;
+    private int index;
 
     public PaquetDeCartes() {
         paquet = new ArrayList<Carte>();
+        index = 0;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return index < paquet.size();
+    }
+
+    @Override
+    public Carte next() {
+        if (!hasNext()) {
+            throw new java.util.NoSuchElementException();
+        }
+        return paquet.get(index++);
     }
 
     public int getNombreDeCartes() {
