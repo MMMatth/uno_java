@@ -3,88 +3,84 @@ package uno.cartes.tests;
 import uno.cartes.*;
 import uno.jeu.Uno;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
 class Plus2Test {
-    public static void main(String[] args) {
-        testGetValeur();
-        testPeutEtreRecouvertePar();
-        testGetCouleur();
-        testSetCouleur();
-        testEstSansCouleur();
-        testEstDeCouleurCompatibleAvec();
-        testPeutEtrePoseeSur();
-        testToString();
+
+    private Uno uno;
+    private PaquetDeCartes paquet;
+
+    @org.junit.jupiter.api.BeforeEach
+    void setUp() {
+        uno = new Uno();
+        paquet = new PaquetDeCartes();
     }
 
-    private static void testGetValeur() {
-        PaquetDeCartes p; Uno u;
-        u = new Uno();
-        p = new PaquetDeCartes();
-        p.ajouter(new Plus2(u, Couleur.ROUGE));
-        assert p.getValeur() == 20 : "getValeur() ne renvoie pas la bonne valeur";
+    @org.junit.jupiter.api.Test
+    void testGetValeur() {
+        paquet.ajouter(new Plus2(uno, Couleur.ROUGE));
+        assertEquals(20, paquet.getValeur(), "getValeur() ne renvoie pas la bonne valeur");
     }
 
-    private static void testPeutEtreRecouvertePar() {
-        Carte c; Uno u;
-        u = new Uno();
-        c = new Plus2(u, Couleur.ROUGE);
-        assert c.peutEtreRecouvertePar(new Chiffre(u, Couleur.ROUGE, 0));
-        assert !c.peutEtreRecouvertePar(new Chiffre(u, Couleur.BLEU, 0));
-        assert c.peutEtreRecouvertePar(new Plus4(u));
+    @org.junit.jupiter.api.Test
+    void testPeutEtreRecouvertePar() {
+        Carte c = new Plus2(uno, Couleur.ROUGE);
+        assertTrue(c.peutEtreRecouvertePar(new Chiffre(uno, Couleur.ROUGE, 0)));
+        assertFalse(c.peutEtreRecouvertePar(new Chiffre(uno, Couleur.BLEU, 0)));
+        assertTrue(c.peutEtreRecouvertePar(new Plus4(uno)));
     }
 
-    private static void testGetCouleur() {
-        Carte c; Uno u;
-        u = new Uno();
-        c = new Plus2(u, Couleur.ROUGE);
-        assert c.getCouleur() == Couleur.ROUGE : "getCouleur() ne renvoie pas la bonne valeur";
+    @org.junit.jupiter.api.Test
+    void testGetCouleur() {
+        Carte c = new Plus2(uno, Couleur.ROUGE);
+        assertEquals(Couleur.ROUGE, c.getCouleur(), "getCouleur() ne renvoie pas la bonne valeur");
     }
 
-    private static void testSetCouleur() {
-        Carte c; Uno u;
-        u = new Uno();
-        c = new Plus2(u, Couleur.ROUGE);
+    @org.junit.jupiter.api.Test
+    void testSetCouleur() {
+        Carte c = new Plus2(uno, Couleur.ROUGE);
         c.setCouleur(Couleur.BLEU);
-        assert c.getCouleur() == Couleur.BLEU : "setCouleur() ne modifie pas la couleur";
+        assertEquals(Couleur.BLEU, c.getCouleur(), "setCouleur() ne modifie pas la couleur");
     }
 
-    private static void testEstSansCouleur() {
-        Carte c; Uno u;
-        u = new Uno();
-        c = new Plus2(u, Couleur.ROUGE);
-        assert !c.estSansCouleur() : "estSansCouleur() ne renvoie pas la bonne valeur";
+    @org.junit.jupiter.api.Test
+    void testEstSansCouleur() {
+        Carte c = new Plus2(uno, Couleur.ROUGE);
+        assertFalse(c.estSansCouleur(), "estSansCouleur() ne renvoie pas la bonne valeur");
     }
 
-    private static void testEstDeCouleurCompatibleAvec() {
-        Carte c; Uno u;
-        u = new Uno();
-        c = new Plus2(u, Couleur.ROUGE);
-        assert c.estDeCouleurCompatibleAvec(new Chiffre(u, Couleur.ROUGE, 0));
-        assert !c.estDeCouleurCompatibleAvec(new Chiffre(u, Couleur.BLEU, 0));
+    @org.junit.jupiter.api.Test
+    void testEstDeCouleurCompatibleAvec() {
+        Carte c = new Plus2(uno, Couleur.ROUGE);
+        assertTrue(c.estDeCouleurCompatibleAvec(new Chiffre(uno, Couleur.ROUGE, 0)));
+        assertFalse(c.estDeCouleurCompatibleAvec(new Chiffre(uno, Couleur.BLEU, 0)));
     }
 
-    private static void testPeutEtrePoseeSur() {
-        Carte c; Uno u;
-        u = new Uno();
-        c = new Plus2(u, Couleur.ROUGE);
+    @org.junit.jupiter.api.Test
+    void testPeutEtrePoseeSur() {
+        Carte c = new Plus2(uno, Couleur.ROUGE);
         /* chiffre */
-        assert c.peutEtrePoseeSur(new Chiffre(u, Couleur.ROUGE, 0));
-        assert !c.peutEtrePoseeSur(new Chiffre(u, Couleur.BLEU, 0));
+        assertTrue(c.peutEtrePoseeSur(new Chiffre(uno, Couleur.ROUGE, 0)));
+        assertFalse(c.peutEtrePoseeSur(new Chiffre(uno, Couleur.BLEU, 0)));
         /* plus2 */
-        assert c.peutEtrePoseeSur(new Plus2(u, Couleur.ROUGE));
-        assert !c.peutEtrePoseeSur(new Plus2(u, Couleur.BLEU));
+        assertTrue(c.peutEtrePoseeSur(new Plus2(uno, Couleur.ROUGE)));
+        assertFalse(c.peutEtrePoseeSur(new Plus2(uno, Couleur.BLEU)));
         /* plus4 */
-        assert c.peutEtrePoseeSur(new Plus4(u));
+        assertTrue(c.peutEtrePoseeSur(new Plus4(uno)));
         /* joker */
-        assert c.peutEtrePoseeSur(new Joker(u));
+        assertTrue(c.peutEtrePoseeSur(new Joker(uno)));
         /* passeTonTour */
-        assert c.peutEtrePoseeSur(new PasseTonTour(u, Couleur.ROUGE));
-        assert !c.peutEtrePoseeSur(new PasseTonTour(u, Couleur.BLEU));
+        assertTrue(c.peutEtrePoseeSur(new PasseTonTour(uno, Couleur.ROUGE)));
+        assertFalse(c.peutEtrePoseeSur(new PasseTonTour(uno, Couleur.BLEU)));
         /* changementDeSens */
-        assert c.peutEtrePoseeSur(new ChangementDeSens(u, Couleur.ROUGE));
-        assert !c.peutEtrePoseeSur(new ChangementDeSens(u, Couleur.BLEU));
+        assertTrue(c.peutEtrePoseeSur(new ChangementDeSens(uno, Couleur.ROUGE)));
+        assertFalse(c.peutEtrePoseeSur(new ChangementDeSens(uno, Couleur.BLEU)));
     }
 
-    private static void testToString() {
-        assert new Plus2(new Uno(), Couleur.ROUGE).toString().equals("Plus2 rouge") : "toString() ne renvoie pas la bonne valeur";
+    @org.junit.jupiter.api.Test
+    void testToString() {
+        assertEquals("Plus2 rouge", new Plus2(uno, Couleur.ROUGE).toString(), "toString() ne renvoie pas la bonne valeur");
     }
 }

@@ -1,92 +1,76 @@
 package uno.cartes.tests;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import uno.cartes.*;
 import uno.jeu.Uno;
 
 class ChiffreTest {
-    public static void main(String[] args) {
-        testGetValeur();
-        testPeutEtreRecouvertePar();
-        testGetCouleur();
-        testSetCouleur();
-        testEstSansCouleur();
-        testEstDeCouleurCompatibleAvec();
-        testPeutEtrePoseeSur();
-        testToString();
+
+    private Uno uno;
+    private Carte chiffre;
+
+    @org.junit.jupiter.api.BeforeEach
+
+    void setUp() {
+        uno = new Uno();
+        chiffre = new Chiffre(uno, Couleur.ROUGE, 0);
     }
 
-    private static void testGetValeur() {
-        PaquetDeCartes p; Uno u;
-        u = new Uno();
-        p = new PaquetDeCartes();
-        p.ajouter(new Chiffre(u, Couleur.ROUGE, 0));
-        assert p.getValeur() == 0 : "getValeur() ne renvoie pas la bonne valeur";
+    @org.junit.jupiter.api.Test
+    void testGetValeur() {
+        assertEquals(0, chiffre.getValeur(), "getValeur() ne renvoie pas la bonne valeur");
     }
 
-    private static void testPeutEtreRecouvertePar() {
-        Carte c; Uno u;
-        u = new Uno();
-        c = new Chiffre(u, Couleur.ROUGE, 0);
-        assert c.peutEtreRecouvertePar(new Chiffre(u, Couleur.ROUGE, 0));
-        assert !c.peutEtreRecouvertePar(new Chiffre(u, Couleur.BLEU, 0));
-        assert c.peutEtreRecouvertePar(new Plus4(u));
+    @org.junit.jupiter.api.Test
+    void testPeutEtreRecouvertePar() {
+        assertTrue(chiffre.peutEtreRecouvertePar(new Chiffre(uno, Couleur.ROUGE, 1)), "peutEtreRecouvertePar() ne renvoie pas vrai pour une carte compatible");
+        assertFalse(chiffre.peutEtreRecouvertePar(new Chiffre(uno, Couleur.BLEU, 0)), "peutEtreRecouvertePar() ne renvoie pas faux pour une carte incompatible");
     }
 
-    private static void testGetCouleur() {
-        Carte c; Uno u;
-        u = new Uno();
-        c = new Chiffre(u, Couleur.ROUGE, 0);
-        assert c.getCouleur() == Couleur.ROUGE : "getCouleur() ne renvoie pas la bonne valeur";
+    @org.junit.jupiter.api.Test
+    void testGetCouleur() {
+        assertEquals(Couleur.ROUGE, chiffre.getCouleur(), "getCouleur() ne renvoie pas la bonne valeur");
     }
 
-    private static void testSetCouleur() {
-        Carte c; Uno u;
-        u = new Uno();
-        c = new Chiffre(u, Couleur.ROUGE, 0);
-        c.setCouleur(Couleur.BLEU);
-        assert c.getCouleur() == Couleur.BLEU : "setCouleur() ne modifie pas la couleur";
+    @org.junit.jupiter.api.Test
+    void testSetCouleur() {
+        chiffre.setCouleur(Couleur.BLEU);
+        assertEquals(Couleur.BLEU, chiffre.getCouleur(), "setCouleur() ne modifie pas la couleur");
     }
 
-    private static void testEstSansCouleur() {
-        Carte c; Uno u;
-        u = new Uno();
-        c = new Chiffre(u, Couleur.ROUGE, 0);
-        assert !c.estSansCouleur() : "estSansCouleur() ne renvoie pas la bonne valeur";
+    @org.junit.jupiter.api.Test
+    void testEstSansCouleur() {
+        assertFalse(chiffre.estSansCouleur(), "estSansCouleur() ne renvoie pas faux");
     }
 
-    private static void testEstDeCouleurCompatibleAvec() {
-        Carte c; Uno u;
-        u = new Uno();
-        c = new Chiffre(u, Couleur.ROUGE, 0);
-        assert c.estDeCouleurCompatibleAvec(new Chiffre(u, Couleur.ROUGE, 0));
-        assert !c.estDeCouleurCompatibleAvec(new Chiffre(u, Couleur.BLEU, 0));
+    @org.junit.jupiter.api.Test
+    void testEstDeCouleurCompatibleAvec() {
+        assertTrue(chiffre.estDeCouleurCompatibleAvec(new Chiffre(uno, Couleur.ROUGE, 1)), "estDeCouleurCompatibleAvec() ne renvoie pas vrai pour une carte compatible");
+        assertFalse(chiffre.estDeCouleurCompatibleAvec(new Chiffre(uno, Couleur.BLEU, 0)), "estDeCouleurCompatibleAvec() ne renvoie pas faux pour une carte incompatible");
     }
 
-    private static void testPeutEtrePoseeSur(){
-        Carte c; Uno u;
-        u = new Uno();
-        c = new Chiffre(u, Couleur.ROUGE, 0);
-        /* Chiffre */
-        assert c.peutEtrePoseeSur(new Chiffre(u, Couleur.ROUGE, 0));
-        assert !c.peutEtrePoseeSur(new Chiffre(u, Couleur.BLEU, 0));
-        /* Plus4 */
-        assert c.peutEtrePoseeSur(new Plus4(u));
-        /* Plus2 */
-        assert c.peutEtrePoseeSur(new Plus2(u, Couleur.ROUGE));
-        assert !c.peutEtrePoseeSur(new Plus2(u, Couleur.BLEU));
-        /* PasseTonTour */
-        assert c.peutEtrePoseeSur(new PasseTonTour(u, Couleur.ROUGE));
-        assert !c.peutEtrePoseeSur(new PasseTonTour(u, Couleur.BLEU));
-        /* Joker */
-        assert c.peutEtrePoseeSur(new Joker(u));
-        /* Changement de sens */
-        assert c.peutEtrePoseeSur(new ChangementDeSens(u, Couleur.ROUGE));
-        assert !c.peutEtrePoseeSur(new ChangementDeSens(u, Couleur.BLEU));
+    @org.junit.jupiter.api.Test
+    void testPeutEtrePoseeSur() {
+        assertTrue(chiffre.peutEtrePoseeSur(new Chiffre(uno, Couleur.ROUGE, 1)), "peutEtrePoseeSur(Chiffre) ne renvoie pas vrai pour une carte compatible");
+        assertFalse(chiffre.peutEtrePoseeSur(new Chiffre(uno, Couleur.BLEU, 0)), "peutEtrePoseeSur(Chiffre) ne renvoie pas faux pour une carte incompatible");
+
+        assertTrue(chiffre.peutEtrePoseeSur(new Plus2(uno, Couleur.ROUGE)), "peutEtrePoseeSur(Plus2) ne renvoie pas vrai pour une carte compatible");
+        assertFalse(chiffre.peutEtrePoseeSur(new Plus2(uno, Couleur.BLEU)), "peutEtrePoseeSur(Plus2) ne renvoie pas faux pour une carte incompatible");
+
+        assertTrue(chiffre.peutEtrePoseeSur(new Plus4(uno)), "peutEtrePoseeSur(Plus4) ne renvoie pas vrai pour une carte compatible");
+
+        assertTrue(chiffre.peutEtrePoseeSur(new Joker(uno)), "peutEtrePoseeSur(Joker) ne renvoie pas vrai pour une carte compatible");
+
+        assertTrue(chiffre.peutEtrePoseeSur(new PasseTonTour(uno, Couleur.ROUGE)), "peutEtrePoseeSur(PasseTonTour) ne renvoie pas vrai pour une carte compatible");
+        assertFalse(chiffre.peutEtrePoseeSur(new PasseTonTour(uno, Couleur.BLEU)), "peutEtrePoseeSur(PasseTonTour) ne renvoie pas faux pour une carte incompatible");
+
+        assertTrue(chiffre.peutEtrePoseeSur(new ChangementDeSens(uno, Couleur.ROUGE)), "peutEtrePoseeSur(ChangementDeSens) ne renvoie pas vrai pour une carte compatible");
+        assertFalse(chiffre.peutEtrePoseeSur(new ChangementDeSens(uno, Couleur.BLEU)), "peutEtrePoseeSur(ChangementDeSens) ne renvoie pas faux pour une carte incompatible");
     }
-    private static void testToString() {
-        Carte c; Uno u;
-        u = new Uno();
-        c = new Chiffre(u, Couleur.ROUGE, 0);
-        assert c.toString().equals("Chiffre 0 rouge") : "toString() ne renvoie pas la bonne valeur";
+
+    @org.junit.jupiter.api.Test
+    void testToString() {
+        assertEquals("Chiffre 0 rouge", chiffre.toString(), "toString() ne renvoie pas la bonne valeur");
     }
 }
