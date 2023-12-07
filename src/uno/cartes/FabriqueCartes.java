@@ -56,7 +56,7 @@ public class FabriqueCartes {
         return paquet;
     }
 
-    public PaquetDeCartes getPaquetMelange() {
+    public PaquetDeCartes getPaquetMelangerEntier() {
         PaquetDeCartes paquet = getPaquetEntier();
         paquet.melanger();
         return paquet;

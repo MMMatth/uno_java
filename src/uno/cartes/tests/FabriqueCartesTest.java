@@ -2,8 +2,6 @@ package uno.cartes.tests;
 
 import uno.cartes.*;
 
-import org.junit.jupiter.api.Assertions.*;
-
 class FabriqueCartesTest {
 
     private FabriqueCartes fabriqueCartes;
@@ -33,7 +31,7 @@ class FabriqueCartesTest {
     @org.junit.jupiter.api.Test
     void testGetPaquetMelange() {
         PaquetDeCartes p1 = fabriqueCartes.getPaquetEntier();
-        PaquetDeCartes p2 = fabriqueCartes.getPaquetMelange();
+        PaquetDeCartes p2 = fabriqueCartes.getPaquetMelangerEntier();
         assert p1.getNombreDeCartes() == p2.getNombreDeCartes() : "getPaquetMelange() ne renvoie pas un paquet avec le même nombre de cartes";
     }
 
