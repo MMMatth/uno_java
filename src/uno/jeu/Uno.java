@@ -13,6 +13,7 @@ public class Uno {
     private PaquetDeCartes pioche;
     private PaquetDeCartes talon;
     private ArrayList<Joueur> joueurs;
+    private DialogueLigneDeCommande dialogue;
     public Uno() {
     }
     public void initJoueurs(int nbJoueurs) {
@@ -21,6 +22,10 @@ public class Uno {
             joueurs.add(new Bot(this, "Bot " + i, i, 0) );
         }
         joueurs.add(new JoueurHumain(this, "Joueur", nbJoueurs));
+    }
+
+    public void setDialogue(DialogueLigneDeCommande dialogue) {
+        this.dialogue = dialogue;
     }
 
     public void choisirJoueurQuiJoue() {
@@ -58,27 +63,25 @@ public class Uno {
         initPioche();
         initTalon();
         dirstribuerCarte();
+        this.dialogue.reagir();
     }
-
-
-
-
-
-
     /* carte actions */
+    /** fonction qui permet de changer le sens du jeu */
     public void changerSens(){
         sensHoraire = !sensHoraire;
     }
-    public void passerTour(){
+
+    /** fonction qui permet de sauter le tour du joueur suivant */
+    public void changeDeJoueur(){
         joueurQuiJoue = (joueurQuiJoue + 1) % joueurs.size();
     }
 
+    /** fonction qui permet de donner des cartes au joueur suivant */
     public void donnerCarteAuJoueurSuivant(int nbCartes){
         for (int i = 0; i < nbCartes; i++) {
             joueurs.get((joueurQuiJoue + 1) % joueurs.size()).piocher();
         }
     }
-
 
     /* getters */
     public int getNbJoueurs() {return joueurs.size();}
@@ -87,11 +90,28 @@ public class Uno {
     public boolean getSensHoraire() {return sensHoraire;}
     public PaquetDeCartes getPioche() {return pioche;}
     public PaquetDeCartes getTalon() {return talon;}
+
+    // fonction qui recupere les scores des joueurs
+    public ArrayList<Integer> getScores(){
+        ArrayList<Integer> scores = new ArrayList<Integer>();
+        for (Joueur joueur : joueurs) {
+            scores.add(joueur.getScore());
+        }
+        return scores;
+    }
+
+    public Joueur getJoueur(int i) {
+        return joueurs.get(i);
+    }
+
     /* setters */
-    public void setJoueurQuiDistribue(int joueurQuiDistribue) {this.joueurQuiDistribue = joueurQuiDistribue;}
-    public void setJoueurQuiJoue(int joueurQuiJoue) {this.joueurQuiJoue = joueurQuiJoue;}
-    public void setSensHoraire(boolean sensHoraire) {this.sensHoraire = sensHoraire;}
-    public void setPioche(PaquetDeCartes pioche) {this.pioche = pioche;}
-    public void setTalon(PaquetDeCartes talon) {this.talon = talon;}
+    public boolean estFini() {
+        for (Joueur joueur : joueurs) {
+            if (joueur.getNombreDeCartes() == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
     public void addToTalon(Carte carte) {talon.ajouter(carte);}
 }

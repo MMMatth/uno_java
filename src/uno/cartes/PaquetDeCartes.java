@@ -100,7 +100,11 @@ public class PaquetDeCartes implements Iterator<Carte>{
     }
 
     public int getValeur() {
-        return paquet.get(0).getValeur();
+        int valeur = 0;
+        for (Carte carte : paquet) {
+            valeur += carte.getValeur();
+        }
+        return valeur;
     }
 
     public String toString() {

@@ -29,6 +29,14 @@ public abstract class Joueur {
         this.main.ajouter(this.uno.getPioche().piocher());
     }
 
+    public int getNombreDeCartes() {
+        return this.main.getNombreDeCartes();
+    }
+
+    public int getScore(){
+        return this.main.getValeur();
+    }
+
     public PaquetDeCartes getMain() {
         return main;
     }

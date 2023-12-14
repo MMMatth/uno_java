@@ -57,7 +57,7 @@ public class PasseTonTour extends Carte{
 
     @Override
     public void appliquerEffet() {
-        u.passerTour();
+        u.changeDeJoueur();
     }
     public String toString(){
         return "PasseTonTour " +

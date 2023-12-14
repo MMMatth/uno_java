@@ -63,5 +63,6 @@ public class Plus2 extends Carte{
     @Override
     public void appliquerEffet() {
         u.donnerCarteAuJoueurSuivant(2);
+        u.changeDeJoueur();
     }
 }
