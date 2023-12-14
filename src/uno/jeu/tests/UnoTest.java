@@ -15,7 +15,7 @@ class UnoTest {
     @Test
     void initJoueurs() {
         uno.initJoueurs(4);
-        assertTrue(uno.getNbJoueurs() == 4, "initJoueurs() ne renvoie pas la bonne valeur");
+        assertEquals(4, uno.getNbJoueurs(), "initJoueurs() ne renvoie pas la bonne valeur");
     }
 
     @Test
@@ -36,13 +36,13 @@ class UnoTest {
     @Test
     void initPioche() {
         uno.initPioche();
-        assertTrue(uno.getPioche().getNombreDeCartes() == 108, "initPioche() ne renvoie pas la bonne valeur");
+        assertEquals(108, uno.getPioche().getNombreDeCartes(), "initPioche() ne renvoie pas la bonne valeur");
     }
 
     @Test
     void initTalon() {
         uno.initTalon();
-        assertTrue(uno.getTalon().getNombreDeCartes() == 0, "initTalon() ne renvoie pas la bonne valeur");
+        assertEquals(0, uno.getTalon().getNombreDeCartes(), "initTalon() ne renvoie pas la bonne valeur");
     }
 
     @Test

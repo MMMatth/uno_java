@@ -24,6 +24,7 @@ public abstract class Carte {
     public abstract boolean peutEtrePoseeSur(Joker c);
     public abstract boolean peutEtrePoseeSur(PasseTonTour c);
     public abstract boolean peutEtrePoseeSur(ChangementDeSens c);
+
     public abstract String toString();
 
 }

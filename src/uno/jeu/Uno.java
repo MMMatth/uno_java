@@ -16,7 +16,6 @@ public class Uno {
     public Uno() {
     }
     public void initJoueurs(int nbJoueurs) {
-
         joueurs = new ArrayList<Joueur>();
         for (int i = 0; i < nbJoueurs - 1; i++) {
             joueurs.add(new Bot(this, "Bot " + i, i, 0) );
@@ -39,6 +38,15 @@ public class Uno {
         FabriqueCartes fabriqueCartes = FabriqueCartes.getInstance();
         talon = fabriqueCartes.getPaquetVide();
     }
+
+    public void dirstribuerCarte(){
+        for (int i = 0; i < 7; i++) {
+            for (Joueur joueur : joueurs) {
+                joueur.piocher();
+            }
+        }
+        addToTalon(pioche.piocher());
+    }
     public void initSenseHoraire(boolean sensHoraire){
         this.sensHoraire = sensHoraire;
     }
@@ -49,7 +57,16 @@ public class Uno {
         initSenseHoraire(true);
         initPioche();
         initTalon();
+        dirstribuerCarte();
     }
+
+
+
+
+
+
+
+
 
     /* getters */
     public int getNbJoueurs() {return joueurs.size();}
@@ -58,4 +75,11 @@ public class Uno {
     public boolean getSensHoraire() {return sensHoraire;}
     public PaquetDeCartes getPioche() {return pioche;}
     public PaquetDeCartes getTalon() {return talon;}
+    /* setters */
+    public void setJoueurQuiDistribue(int joueurQuiDistribue) {this.joueurQuiDistribue = joueurQuiDistribue;}
+    public void setJoueurQuiJoue(int joueurQuiJoue) {this.joueurQuiJoue = joueurQuiJoue;}
+    public void setSensHoraire(boolean sensHoraire) {this.sensHoraire = sensHoraire;}
+    public void setPioche(PaquetDeCartes pioche) {this.pioche = pioche;}
+    public void setTalon(PaquetDeCartes talon) {this.talon = talon;}
+    public void addToTalon(Carte carte) {talon.ajouter(carte);}
 }

@@ -93,6 +93,7 @@ class PaquetDeCartesTest {
     void testLire() {
         try {
             paquet.lire("test.txt");
+            System.out.println(paquet.toString());
         } catch (ErreurFichier e) {
             System.out.println(e.getMessage());
         }

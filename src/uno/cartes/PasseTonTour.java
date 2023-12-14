@@ -42,6 +42,9 @@ public class PasseTonTour extends Carte{
     public boolean peutEtrePoseeSur(ChangementDeSens c){
         return c.estDeCouleurCompatibleAvec(this);
     }
+
+    public void changeDeJoueur(){
+    }
     public String toString(){
         return "PasseTonTour " +
                 couleur;
