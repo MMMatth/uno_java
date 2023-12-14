@@ -65,7 +65,19 @@ public class Uno {
 
 
 
+    /* carte actions */
+    public void changerSens(){
+        sensHoraire = !sensHoraire;
+    }
+    public void passerTour(){
+        joueurQuiJoue = (joueurQuiJoue + 1) % joueurs.size();
+    }
 
+    public void donnerCarteAuJoueurSuivant(int nbCartes){
+        for (int i = 0; i < nbCartes; i++) {
+            joueurs.get((joueurQuiJoue + 1) % joueurs.size()).piocher();
+        }
+    }
 
 
     /* getters */
