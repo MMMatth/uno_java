@@ -29,7 +29,8 @@ public class Uno {
     }
 
     public void choisirJoueurQuiJoue() {
-        joueurQuiJoue = joueurQuiDistribue + 1 % joueurs.size();
+        joueurQuiJoue = joueurQuiJoue + 1 % (joueurs.size() - 1);
+        dialogue.reagir();
     }
     public void chosirJoueurQuiDistribue() {
         int ran = (int) (Math.random() * joueurs.size());
@@ -57,8 +58,8 @@ public class Uno {
     }
     public void initialiser(int nbrBots) {
         initJoueurs(nbrBots);
-        choisirJoueurQuiJoue();
         chosirJoueurQuiDistribue();
+        this.joueurQuiJoue = joueurQuiDistribue + 1 % joueurs.size();
         initSenseHoraire(true);
         initPioche();
         initTalon();

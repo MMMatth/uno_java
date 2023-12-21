@@ -14,7 +14,6 @@ public class DialogueLigneDeCommande {
         String nom = sc.next();
         uno.setDialogue(this);
         uno.initialiser(nbJoueurs);
-        reagir();
     }
 
     public void reagir(){
@@ -30,7 +29,7 @@ public class DialogueLigneDeCommande {
         uno.getJoueur(uno.getJoueurQuiJoue()).jouer(coup);
      }else if(uno.getJoueurQuiJoue() != uno.getNbJoueurs()){
          System.out.println("C'est au tour de " + uno.getJoueur(uno.getJoueurQuiJoue()-1).getNom() + " de jouer");
-        uno.getJoueur(uno.getJoueurQuiJoue()).jouer("");
+            uno.getJoueur(uno.getJoueurQuiJoue()).jouer("");
      }
     }
 }

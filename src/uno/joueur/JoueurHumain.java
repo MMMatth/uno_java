@@ -76,5 +76,7 @@ public class JoueurHumain extends Joueur{
                 System.out.println(e.getMessage());
             }
         }
+        uno.choisirJoueurQuiJoue();
+
     }
 }

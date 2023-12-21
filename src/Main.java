@@ -6,7 +6,5 @@ public class Main {
         Uno uno = new Uno();
         DialogueLigneDeCommande dlc = new DialogueLigneDeCommande(uno);
         uno.setDialogue(dlc);
-
-
     }
 }
