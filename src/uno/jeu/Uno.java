@@ -85,6 +85,7 @@ public class Uno {
 
     /** fonction qui permet de donner des cartes au joueur suivant */
     public void donnerCarteAuJoueurSuivant(int nbCartes){
+        System.out.println("Le joueur " + joueurs.get((joueurQuiJoue + 1) % joueurs.size()).getNom() + " pioche " + nbCartes + " cartes");
         for (int i = 0; i < nbCartes; i++) {
             joueurs.get((joueurQuiJoue + 1) % joueurs.size()).piocher();
         }

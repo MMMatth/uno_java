@@ -71,6 +71,7 @@ public class JoueurHumain extends Joueur{
                     Carte sommetTalon = this.uno.getTalon().getSommet();
                     if (this.main.contient(carteVoulue) ) {
                         if (sommetTalon.peutEtreRecouvertePar(carteVoulue)) {
+                            carteVoulue.appliquerEffet();
                             this.uno.addToTalon(carteVoulue);
                             this.main.enlever(carteVoulue);
                         }else {

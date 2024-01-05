@@ -26,6 +26,25 @@ public abstract class Carte {
     public abstract boolean peutEtrePoseeSur(ChangementDeSens c);
 
     public abstract void appliquerEffet();
+
+    public String getCouleurString(){
+        if (couleur == null) {
+            return "\u001B[37m";
+        }else{
+            switch (couleur) {
+                case ROUGE:
+                    return "\u001B[31m";
+                case BLEU:
+                    return "\u001B[34m";
+                case VERT:
+                    return  "\u001B[32m";
+                case JAUNE:
+                    return "\u001B[33m";
+                default:
+                    return "\u001B[37m";
+            }
+        }
+    }
     public abstract String toString();
 
 }

@@ -28,36 +28,49 @@ public class Plus4 extends Carte {
     }
     @Override
     public boolean estDeCouleurCompatibleAvec(Carte c) {
-        return true;
+        if (couleur == null){
+            return true;
+        }else {
+            return c.getCouleur() == couleur;
+        }
     }
     @Override
     public boolean peutEtrePoseeSur(Chiffre c) {
-        return true;
+        return estDeCouleurCompatibleAvec(c);
     }
     @Override
     public boolean peutEtrePoseeSur(Plus2 c) {
-        return true;
+        return estDeCouleurCompatibleAvec(c);
     }
     @Override
     public boolean peutEtrePoseeSur(Plus4 c) {
-        return true;
+        return estDeCouleurCompatibleAvec(c);
     }
     @Override
     public boolean peutEtrePoseeSur(Joker c) {
-        return true;
+        return estDeCouleurCompatibleAvec(c);
     }
     @Override
     public boolean peutEtrePoseeSur(PasseTonTour c) {
-        return true;
+        return estDeCouleurCompatibleAvec(c);
     }
     @Override
     public boolean peutEtrePoseeSur(ChangementDeSens c) {
-        return true;
+        return estDeCouleurCompatibleAvec(c);
     }
     @Override
     public String toString() {
-        return "Plus4";
+        StringBuilder result = new StringBuilder();
+
+        String couleurTexte = getCouleurString();
+
+        result.append(couleurTexte)
+                .append("Plus4 ")
+                .append("\u001B[0m");
+
+        return result.toString();
     }
+
 
     @Override
     public void appliquerEffet() {

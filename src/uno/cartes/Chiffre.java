@@ -64,11 +64,20 @@ public class Chiffre extends Carte{
     public void appliquerEffet() {
         // rien
     }
-    public String toString(){
-        return "Chiffre " +
-                valeur +
-                " " +
-                couleur;
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        String couleurTexte = getCouleurString();
+
+        result.append(couleurTexte)
+                .append("Chiffre ")
+                .append(valeur)
+                .append(" ")
+                .append(couleur)
+                .append("\u001B[0m");
+
+        return result.toString();
     }
+
 
 }

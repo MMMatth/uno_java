@@ -56,10 +56,19 @@ public class Plus2 extends Carte{
         return c.estDeCouleurCompatibleAvec(this);
     }
     @Override
-    public String toString(){
-        return "Plus2 " +
-                couleur;
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        String couleurTexte = getCouleurString();
+
+        result.append(couleurTexte)
+                .append("Plus2 ")
+                .append(couleur)
+                .append("\u001B[0m");
+
+        return result.toString();
     }
+
     @Override
     public void appliquerEffet() {
         u.donnerCarteAuJoueurSuivant(2);

@@ -59,8 +59,19 @@ public class PasseTonTour extends Carte{
     public void appliquerEffet() {
         u.changeDeJoueur();
     }
-    public String toString(){
-        return "PasseTonTour " +
-                couleur;
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        String couleurTexte = getCouleurString();
+
+        result.append(couleurTexte)
+                .append("PasseTonTour ")
+                .append(couleur)
+                .append("\u001B[0m");
+
+        return result.toString();
     }
+
 }

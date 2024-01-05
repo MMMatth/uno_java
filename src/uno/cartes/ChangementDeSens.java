@@ -60,8 +60,17 @@ public class ChangementDeSens extends Carte{
         u.changerSens();
     }
 
-    public String toString(){
-        return "ChangementDeSens " +
-                couleur;
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        String couleurTexte = getCouleurString();
+
+        result.append(couleurTexte)
+                .append("ChangementDeSens ")
+                .append(couleur)
+                .append("\u001B[0m");
+
+        return result.toString();
     }
+
 }

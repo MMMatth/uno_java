@@ -28,39 +28,66 @@ public class Joker extends Carte {
     }
     @Override
     public boolean estDeCouleurCompatibleAvec(Carte c) {
-        return true;
+        if (couleur == null){
+            return true;
+        }else {
+            return c.getCouleur() == couleur;
+        }
     }
     @Override
     public boolean peutEtrePoseeSur(Chiffre c) {
-        return true;
+        return estDeCouleurCompatibleAvec(c);
     }
     @Override
     public boolean peutEtrePoseeSur(Plus2 c) {
-        return true;
+        return estDeCouleurCompatibleAvec(c);
     }
     @Override
     public boolean peutEtrePoseeSur(Plus4 c) {
-        return true;
+        return estDeCouleurCompatibleAvec(c);
     }
     @Override
     public boolean peutEtrePoseeSur(Joker c) {
-        return true;
+        return estDeCouleurCompatibleAvec(c);
     }
     @Override
     public boolean peutEtrePoseeSur(PasseTonTour c) {
-        return true;
+        return estDeCouleurCompatibleAvec(c);
     }
     @Override
     public boolean peutEtrePoseeSur(ChangementDeSens c) {
-        return true;
+        return estDeCouleurCompatibleAvec(c);
     }
     @Override
     public String toString() {
-        return "Joker";
+        StringBuilder result = new StringBuilder();
+
+
+        String couleurTexte = getCouleurString();
+
+        result.append(couleurTexte)
+                .append("Joker");
+
+
+        if (couleur != null){
+            result.append(" ")
+                    .append(couleur);
+        }
+
+        result.append("\u001B[0m");
+
+        return result.toString();
     }
+
 
     @Override
     public void appliquerEffet() {
-        // rien
+        if (u.getJoueurQuiJoue() == u.getNbJoueurs() - 1){
+            // on demande au joueur la couleur qu'il veut
+            this.couleur = Couleur.BLEU;
+
+        }else {
+            this.couleur = Couleur.VERT;
+        }
     }
 }

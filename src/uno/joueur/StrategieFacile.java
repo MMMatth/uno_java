@@ -6,7 +6,6 @@ import uno.joueur.Strategie;
 public class StrategieFacile implements Strategie {
     @Override
     public void jouer(PaquetDeCartes main, Uno uno) throws Exception{
-        System.out.println(main);
         Carte sommetTalon = uno.getTalon().getSommet();
         boolean aJoue = false;
         if (sommetTalon != null) {
