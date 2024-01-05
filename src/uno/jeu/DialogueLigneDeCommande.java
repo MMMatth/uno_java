@@ -22,14 +22,18 @@ public class DialogueLigneDeCommande {
             for (int i = 0; i < uno.getNbJoueurs(); i++) {
                 System.out.println("Le joueur " + uno.getJoueur(i).getNom() + " a un score de " + uno.getJoueur(i).getScore());
             }
-     }else if(uno.getJoueurQuiJoue() == uno.getNbJoueurs()){
-        System.out.println("C'est à votre tour de jouer");
+     }else if(uno.getJoueurQuiJoue() == uno.getNbJoueurs() - 1){
+        System.out.println("C'est à votre tour de jouer"); // TO DO : preciser ulterieuement le nom du joueur
+        System.out.println("Voici votre main : \n " + uno.getJoueur(uno.getJoueurQuiJoue()).getMain().toString());
+         System.out.println("La carte sur le talon est : " + uno.getTalon().getSommet());
         Scanner sc = new Scanner(System.in);
         String coup = sc.next();
         uno.getJoueur(uno.getJoueurQuiJoue()).jouer(coup);
-     }else if(uno.getJoueurQuiJoue() != uno.getNbJoueurs()){
-         System.out.println("C'est au tour de " + uno.getJoueur(uno.getJoueurQuiJoue()-1).getNom() + " de jouer");
-            uno.getJoueur(uno.getJoueurQuiJoue()).jouer("");
+     }else if(uno.getJoueurQuiJoue() != uno.getNbJoueurs() - 1){
+        System.out.println("C'est au tour de " + uno.getJoueur(uno.getJoueurQuiJoue()).getNom() + " de jouer");
+        System.out.println("La carte sur le talon est : " + uno.getTalon().getSommet());
+
+        uno.getJoueur(uno.getJoueurQuiJoue()).jouer("");
      }
     }
 }

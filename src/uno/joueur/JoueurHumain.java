@@ -13,7 +13,7 @@ public class JoueurHumain extends Joueur{
         return switch (couleur) {
             case "r" -> Couleur.ROUGE;
             case "b" -> Couleur.BLEU;
-            case "c" -> Couleur.VERT;
+            case "v" -> Couleur.VERT;
             case "j" -> Couleur.JAUNE;
             default -> null;
         };
@@ -29,8 +29,9 @@ public class JoueurHumain extends Joueur{
         switch (parts[0]) {
             case "c":
                 couleur = choisirCouleur(parts[2]);
+                System.out.println(couleur);
                 if (couleur == null || Integer.parseInt(parts[1]) < 0 || Integer.parseInt(parts[1]) > 9) {
-                    throw (new CoupIncorrect("Couleur incorrecte"));
+                    throw (new CoupIncorrect("Couleur incorrecte1"));
                 }
                 return new Chiffre(this.uno, couleur, Integer.parseInt(parts[1]));
             case "p4":
@@ -38,45 +39,60 @@ public class JoueurHumain extends Joueur{
             case "p2":
                 couleur = choisirCouleur(parts[1]);
                 if (couleur == null) {
-                    throw (new CoupIncorrect("Couleur incorrecte"));
+                    throw (new CoupIncorrect("Couleur incorrecte2"));
                 }
                 return new Plus2(this.uno, couleur);
             case "ptt":
                 couleur = choisirCouleur(parts[1]);
                 if (couleur == null) {
-                    throw (new CoupIncorrect("Couleur incorrecte"));
+                    throw (new CoupIncorrect("Couleur incorrecte3"));
                 }
                 return new PasseTonTour(this.uno, couleur);
             case "cds":
                 couleur = choisirCouleur(parts[1]);
                 if (couleur == null) {
-                    throw (new CoupIncorrect("Couleur incorrecte"));
+                    throw (new CoupIncorrect("Couleur incorrecte4"));
                 }
                 return new ChangementDeSens(this.uno, couleur);
             case "j":
                 return new Joker(this.uno);
             default:
-                throw (new CoupIncorrect("Carte incorrecte"));
+                throw (new CoupIncorrect("Carte incorrecte5"));
         }
     }
     public void jouer(String coup) {
+        boolean rejouer = false;
         if (coup.equals("p")) {
             this.piocher();
         } else {
             try {
-                Carte carteVoulue = carteChoisie(coup);
-                if (this.main.contient(carteVoulue)){
-                    this.uno.addToTalon(carteVoulue);
-                    this.main.enlever(carteVoulue);
+                try {
+                    Carte carteVoulue = carteChoisie(coup);
+                    Carte sommetTalon = this.uno.getTalon().getSommet();
+                    if (this.main.contient(carteVoulue) ) {
+                        if (sommetTalon.peutEtreRecouvertePar(carteVoulue)) {
+                            this.uno.addToTalon(carteVoulue);
+                            this.main.enlever(carteVoulue);
+                        }else {
+                            throw (new CoupIncorrect("Carte non jouable sur le talon"));
+                        }
+                    }
+                    else {
+                        throw (new CoupIncorrect("Carte non présente dans la main"));
+                    }
                 }
-                else {
-                    throw (new CoupIncorrect("Carte non présente dans la main"));
+                catch (CoupIncorrect e){
+                    throw (new CoupIncorrect("Carte incorrecte"));
                 }
             } catch (CoupIncorrect e) {
+                rejouer = true;
                 System.out.println(e.getMessage());
             }
         }
-        uno.choisirJoueurQuiJoue();
-
+        if (!rejouer) {
+            this.uno.choisirJoueurQuiJoue();
+        }else {
+            this.uno.joueurRejoue();
+        }
     }
 }

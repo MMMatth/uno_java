@@ -6,9 +6,9 @@ import uno.cartes.*;
 import java.util.ArrayList;
 
 public class Uno {
-    private int joueurQuiDistribue;
-    private int joueurQuiJoue;
-    private boolean sensHoraire;
+    private int joueurQuiDistribue; // variable qui varie entre 0 et nbJoueurs - 1
+    private int joueurQuiJoue; // variable qui varie entre 0 et nbJoueurs - 1
+    private boolean sensHoraire; // true si le sens est horaire, false sinon
     private int difficulte;
     private PaquetDeCartes pioche;
     private PaquetDeCartes talon;
@@ -29,11 +29,16 @@ public class Uno {
     }
 
     public void choisirJoueurQuiJoue() {
-        joueurQuiJoue = joueurQuiJoue + 1 % (joueurs.size() - 1);
+        joueurQuiJoue = (joueurQuiJoue + 1) % (joueurs.size());
+        dialogue.reagir();
+    }
+
+    public void joueurRejoue() {
         dialogue.reagir();
     }
     public void chosirJoueurQuiDistribue() {
-        int ran = (int) (Math.random() * joueurs.size());
+        int ran = (int) (Math.random() % (joueurs.size() - 1)) ;
+        System.out.println(ran);
         joueurQuiDistribue = ran;
     }
     public void initPioche() {
@@ -59,7 +64,8 @@ public class Uno {
     public void initialiser(int nbrBots) {
         initJoueurs(nbrBots);
         chosirJoueurQuiDistribue();
-        this.joueurQuiJoue = joueurQuiDistribue + 1 % joueurs.size();
+        System.out.println("joueur qui distribue : " + joueurQuiDistribue);
+        this.joueurQuiJoue = joueurQuiDistribue + 1 % (joueurs.size() - 1);
         initSenseHoraire(true);
         initPioche();
         initTalon();
