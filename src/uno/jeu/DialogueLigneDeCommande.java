@@ -7,7 +7,6 @@ public class DialogueLigneDeCommande {
 
     private String reset = "\u001B[0m";
     private String souligné = "\u001B[4m";
-
     private String gras = "\u001B[1m";
     private String rouge = "\u001B[31m";
     private String vert = "\u001B[32m";
@@ -37,6 +36,11 @@ public class DialogueLigneDeCommande {
         System.out.println(gras +"La carte sur le talon est : " + uno.getTalon().getSommet() + reset);
         Scanner sc = new Scanner(System.in);
         String coup = sc.next();
+        if (coup.equals("p4") || coup.equals("j")){
+            System.out.println("Veuillez choisir une couleur : " + rouge + "r" + reset + ", " + vert + "v" + reset + ", " + jaune + "j" + reset + ", " + bleu + "b" + reset);
+            String couleur = sc.next();
+            coup = coup + "." + couleur;
+        }
         uno.getJoueur(uno.getJoueurQuiJoue()).jouer(coup);
      }else if(uno.getJoueurQuiJoue() != uno.getNbJoueurs() - 1){
         System.out.println(gras + souligné + "C'est au tour de " + uno.getJoueur(uno.getJoueurQuiJoue()).getNom() + " de jouer" + reset);

@@ -13,6 +13,7 @@ public class StrategieFacile implements Strategie {
                 Carte carte = main.getSommet();
                 if (sommetTalon.peutEtreRecouvertePar(carte) && !aJoue) {
                     System.out.println("Le bot a joué la carte " + carte + " sur le talon ");
+                    carte.appliquerEffet();
                     uno.addToTalon(carte);
                     main.enlever(carte);
                     aJoue = true;

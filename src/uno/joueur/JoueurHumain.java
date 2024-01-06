@@ -26,38 +26,51 @@ public class JoueurHumain extends Joueur{
     public Carte carteChoisie(String coup) throws CoupIncorrect {
         String[] parts = coup.split("\\.");
         Couleur couleur;
+        Carte carte;
         switch (parts[0]) {
             case "c":
                 couleur = choisirCouleur(parts[2]);
-                System.out.println(couleur);
                 if (couleur == null || Integer.parseInt(parts[1]) < 0 || Integer.parseInt(parts[1]) > 9) {
-                    throw (new CoupIncorrect("Couleur incorrecte1"));
+                    throw (new CoupIncorrect("Couleur incorrecte pour le chiffre"));
                 }
                 return new Chiffre(this.uno, couleur, Integer.parseInt(parts[1]));
             case "p4":
-                return new Plus4(this.uno);
-            case "p2":
                 couleur = choisirCouleur(parts[1]);
+                System.out.println(coup + parts[1] + couleur);
                 if (couleur == null) {
-                    throw (new CoupIncorrect("Couleur incorrecte2"));
+                    throw (new CoupIncorrect("Couleur incorrecte pour le plus 4"));
+                }
+                carte = new Plus4(this.uno);
+                carte.setCouleur(couleur);
+                return carte;
+            case "p2":
+                couleur = choisirCouleur(parts[1] );
+                if (couleur == null) {
+                    throw (new CoupIncorrect("Couleur incorrecte pour le plus 2"));
                 }
                 return new Plus2(this.uno, couleur);
             case "ptt":
                 couleur = choisirCouleur(parts[1]);
                 if (couleur == null) {
-                    throw (new CoupIncorrect("Couleur incorrecte3"));
+                    throw (new CoupIncorrect("Couleur incorrecte pour le passe ton tour"));
                 }
                 return new PasseTonTour(this.uno, couleur);
             case "cds":
                 couleur = choisirCouleur(parts[1]);
                 if (couleur == null) {
-                    throw (new CoupIncorrect("Couleur incorrecte4"));
+                    throw (new CoupIncorrect("Couleur incorrecte pour le changement de sens"));
                 }
                 return new ChangementDeSens(this.uno, couleur);
             case "j":
-                return new Joker(this.uno);
+                couleur = choisirCouleur(parts[1]);
+                if (couleur == null) {
+                    throw (new CoupIncorrect("Couleur incorrecte pour le joker"));
+                }
+                carte = new Joker(this.uno);
+                carte.setCouleur(couleur);
+                return carte;
             default:
-                throw (new CoupIncorrect("Carte incorrecte5"));
+                throw (new CoupIncorrect("Carte incorrecte pour le coup joué"));
         }
     }
     public void jouer(String coup) {
@@ -73,7 +86,8 @@ public class JoueurHumain extends Joueur{
                         if (sommetTalon.peutEtreRecouvertePar(carteVoulue)) {
                             carteVoulue.appliquerEffet();
                             this.uno.addToTalon(carteVoulue);
-                            this.main.enlever(carteVoulue);
+                            System.out.println("Vous avez joué la carte " + carteVoulue + " sur le talon");
+                            main.enlever(carteVoulue);
                         }else {
                             throw (new CoupIncorrect("Carte non jouable sur le talon"));
                         }

@@ -121,7 +121,17 @@ public class PaquetDeCartes implements Iterator<Carte>{
     }
 
     public void enlever(Carte carte) {
-        paquet.remove(carte);
+//        paquet.remove(carte);
+        for (int i = 0; i < paquet.size(); i++) {
+            if (paquet.get(i).getClass().getSimpleName().equals(carte.getClass().getSimpleName())) {
+                if (paquet.get(i).getCouleur() == carte.getCouleur() || paquet.get(i).getCouleur() == null) {
+                    if (paquet.get(i).getValeur() == carte.getValeur()) {
+                        paquet.remove(i);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public void melanger() {
