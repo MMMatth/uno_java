@@ -10,14 +10,14 @@ public class StrategieFacile implements Strategie {
         boolean aJoue = false;
         if (sommetTalon != null) {
             while (main.hasNext()) { // on parcourt la main du bot
-                Carte carte = main.getSommet();
+                Carte carte = main.next();
+                carte.setUno(uno); // on lui donne le uno pour qu'elle puisse appliquer son effet
                 if (sommetTalon.peutEtreRecouvertePar(carte) && !aJoue) {
+                    System.out.println("Le bot a joué " + carte);
                     carte.appliquerEffet();
                     uno.addToTalon(carte);
                     main.enlever(carte);
                     aJoue = true;
-                } else {
-                    main.next();
                 }
             }
             if (!aJoue){

@@ -17,6 +17,11 @@ public class PaquetDeCartes implements Iterator<Carte>{
         paquet = new ArrayList<Carte>();
         index = 0;
     }
+    public PaquetDeCartes(PaquetDeCartes pdc){
+        paquet = new ArrayList<Carte>();
+        index = 0;
+        ajouter(pdc);
+    }
 
     @Override
     public boolean hasNext() {
@@ -118,6 +123,10 @@ public class PaquetDeCartes implements Iterator<Carte>{
 
     public void ajouter(PaquetDeCartes pdc) {
         paquet.addAll(pdc.paquet);
+    }
+
+    public void enlever(int index) {
+        paquet.remove(index);
     }
 
     public void enlever(Carte carte) {

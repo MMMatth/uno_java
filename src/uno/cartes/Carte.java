@@ -11,6 +11,9 @@ public abstract class Carte {
         this.u = u;
         this.couleur = c;
     }
+    public void setUno(Uno u){
+        this.u = u;
+    }
     public abstract int getValeur();
     public abstract boolean peutEtreRecouvertePar(Carte c);
     public abstract Couleur getCouleur();

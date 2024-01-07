@@ -4,63 +4,119 @@ import uno.joueur.*;
 import uno.cartes.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+/**
+ * Class Uno
+ * @brief Classe qui permet de gerer le jeu
+ * @author Matthieu GAUDEL
+ */
 public class Uno {
-    private int joueurQuiDistribue; // variable qui varie entre 0 et nbJoueurs - 1
-    private int joueurQuiJoue; // variable qui varie entre 0 et nbJoueurs - 1
-    private boolean sensHoraire; // true si le sens est horaire, false sinon
-    private int difficulte;
-    private PaquetDeCartes pioche;
-    private PaquetDeCartes talon;
-    private ArrayList<Joueur> joueurs;
-    private DialogueLigneDeCommande dialogue;
-    public Uno() {
-    }
-    public void initJoueurs(int nbJoueurs, String nomJoueur) {
+    private int joueurQuiDistribue; /** < variable qui varie entre 0 et nbJoueurs - 1 */
+
+    private int joueurQuiJoue; /** < variable qui varie entre 0 et nbJoueurs - 1 */
+    private boolean sensHoraire; /** < true si le sens est horaire, false sinon */
+    private int difficulte; /** < difficulte du jeu */
+    private PaquetDeCartes pioche; /** < pioche du jeu */
+    private PaquetDeCartes talon; /** < talon du jeu */
+    private ArrayList<Joueur> joueurs; /** < liste des joueurs */
+    private DialogueLigneDeCommande dialogue; /** < dialogue du jeu */
+
+    /**
+     * @brief Constructeur de la classe Uno
+     */
+    public Uno() {}
+
+    /**
+     * @brief Fonction qui permet d'initialiser les joueurs
+     * @param nbJoueurs nombre de joueurs
+     * @param nomJoueur nom du joueur humain
+     * @throws IllegalArgumentException si le nombre de joueurs est inferieur a 2 ou superieur a 10
+     */
+    public void initJoueurs(int nbJoueurs, String nomJoueur) throws IllegalArgumentException{
         joueurs = new ArrayList<Joueur>();
+        if (nbJoueurs < 2) {
+            throw new IllegalArgumentException("Il faut au moins 2 joueurs");
+        }
+        if (nbJoueurs > 10) {
+            throw new IllegalArgumentException("Il faut au plus 10 joueurs");
+        }
         for (int i = 0; i < nbJoueurs - 1; i++) {
             joueurs.add(new Bot(this, "Bot " + i, i, 0) );
         }
         joueurs.add(new JoueurHumain(this, nomJoueur, nbJoueurs));
     }
 
+    /**
+     * @brief Fonction qui permet d'initialiser le dialogue
+     * @param dialogue
+     */
     public void setDialogue(DialogueLigneDeCommande dialogue) {
         this.dialogue = dialogue;
     }
 
+    /**
+     * @brief Fonction qui permet de choisir le joueur qui joue
+     */
     public void choisirJoueurQuiJoue() {
         changeDeJoueur();
         dialogue.reagir();
     }
 
+    /**
+     * @brief Fonction qui permet de refaire jouer un joueur
+     * @details Fonction qui permet de refaire jouer un joueur par exemple dans le cas ou le joueur se trompe de carte
+     */
     public void joueurRejoue() {
         dialogue.reagir();
     }
+
+    /**
+     * @brief Fonction qui permet de choisir le joueur qui distribue
+     * @details cette fonction utilise un random pour choisir le joueur qui distribue aleatoirement parmis les joueurs
+     */
     public void chosirJoueurQuiDistribue() {
-        int ran = (int) (Math.random() % (joueurs.size() - 1)) ;
-        System.out.println(ran);
-        joueurQuiDistribue = ran;
+        Random random = new Random();
+        int ran = random.nextInt(joueurs.size()); // entier entre 1 et nbJoueurs
+        joueurQuiDistribue = ran - 1;
     }
+
+
+
+    /**
+     * @brief Fonction qui permet d'initialiser la pioche
+     */
     public void initPioche() {
         FabriqueCartes fabriqueCartes = FabriqueCartes.getInstance();
         pioche = fabriqueCartes.getPaquetMelangerEntier();
     }
+
+    /**
+     * @brief Fonction qui permet d'initialiser le talon
+     */
     public void initTalon() {
         FabriqueCartes fabriqueCartes = FabriqueCartes.getInstance();
         talon = fabriqueCartes.getPaquetVide();
     }
 
+    /**
+     * @brief Fonction qui permet de rafraichir la pioche
+     * @details Cette fonction permet de rafraichir la pioche dans le cas ou elle est vide
+     */
     public void refreshPioche(){
-        if (pioche.estVide()){
-            System.out.println("\033[H\033[2J" + "dzefz" + "\033[H\033[2J");
+        if (this.pioche.estVide()){
             Carte derniereCarte = talon.getSommet();
-            talon.enlever(derniereCarte);
-            pioche = talon;
-            talon = FabriqueCartes.getInstance().getPaquetVide();
-            talon.ajouter(derniereCarte);
+            this.talon.enlever(talon.getNombreDeCartes() - 1);
+            this.pioche = new PaquetDeCartes(talon);
+            this.talon = new PaquetDeCartes();
+            this.talon.ajouter(derniereCarte);
         }
     }
 
+    /**
+     * @brief Fonction qui permet de distribuer les cartes
+     * @details cette fonction distribue 7 cartes a chaque joueur une par une
+     */
     public void dirstribuerCarte(){
         for (int i = 0; i < 7; i++) {
             for (Joueur joueur : joueurs) {
@@ -69,26 +125,42 @@ public class Uno {
         }
         addToTalon(pioche.piocher());
     }
+
+    /**
+     * @brief Fonction qui permet d'initialiser le sens du jeu
+     * @param sensHoraire true si le sens est horaire, false sinon
+     */
     public void initSenseHoraire(boolean sensHoraire){
         this.sensHoraire = sensHoraire;
     }
+
+    /**
+     * @brief Fonction qui permet d'initialiser le jeu
+     * @param nbrBots nombre de bots
+     * @param nomJoueur nom du joueur humain
+     */
     public void initialiser(int nbrBots, String nomJoueur) {
         initJoueurs(nbrBots, nomJoueur);
         chosirJoueurQuiDistribue();
-        joueurQuiJoue = joueurQuiDistribue + 1 % (joueurs.size() - 1);
-        initSenseHoraire(true);
+        joueurQuiJoue = joueurQuiDistribue + 1 % (joueurs.size() - 1); // le joueur qui joue est le joueur apres le joueur qui distribue
+        initSenseHoraire(true); // le sens du jeu est horaire
         initPioche();
         initTalon();
         dirstribuerCarte();
-        this.dialogue.reagir();
+        this.dialogue.reagir(); // on démarre le jeu
     }
     /* carte actions */
-    /** fonction qui permet de changer le sens du jeu */
+
+    /**
+     * @brief Fonction qui permet de changer le sens du jeu
+     */
     public void changerSens(){
         sensHoraire = !sensHoraire;
     }
 
-    /** fonction qui permet de sauter le tour du joueur suivant */
+    /**
+     * @brief Fonction qui permet de changer de joueur
+     */
     public void changeDeJoueur(){
         if (sensHoraire){
             joueurQuiJoue = (joueurQuiJoue + 1) % joueurs.size();
@@ -102,8 +174,14 @@ public class Uno {
         }
     }
 
-    /** fonction qui permet de donner des cartes au joueur suivant */
-    public void donnerCarteAuJoueurSuivant(int nbCartes){
+    /**
+     * @brief Fonction qui permet de faire piocher un joueur
+     * @param nbCartes nombre de cartes a piocher
+     */
+    public void donnerCarteAuJoueurSuivant(int nbCartes) {
+        if (nbCartes > this.pioche.getNombreDeCartes()){
+            nbCartes = this.pioche.getNombreDeCartes(); // on ne peut pas piocher plus de cartes que ce qu'il y a dans la pioche
+        }
         for (int i = 0; i < nbCartes; i++) {
             if (sensHoraire){
                 joueurs.get((joueurQuiJoue + 1) % joueurs.size()).piocher();
@@ -120,8 +198,14 @@ public class Uno {
     public boolean getSensHoraire() {return sensHoraire;}
     public PaquetDeCartes getPioche() {return pioche;}
     public PaquetDeCartes getTalon() {return talon;}
+    public Joueur getJoueur(int i) {
+        return joueurs.get(i);
+    }
 
-    // fonction qui recupere les scores des joueurs
+    /**
+     * @brief Fonction qui permet de recuperer les scores des joueurs
+     * @return La liste des scores des joueurs
+     */
     public ArrayList<Integer> getScores(){
         ArrayList<Integer> scores = new ArrayList<Integer>();
         for (Joueur joueur : joueurs) {
@@ -130,11 +214,10 @@ public class Uno {
         return scores;
     }
 
-    public Joueur getJoueur(int i) {
-        return joueurs.get(i);
-    }
-
-    /* setters */
+    /**
+     * @brief Fonction qui permet de savoir si le jeu est fini
+     * @return true si le jeu est fini, false sinon
+     */
     public boolean estFini() {
         for (Joueur joueur : joueurs) {
             if (joueur.getNombreDeCartes() == 0) {
@@ -143,5 +226,6 @@ public class Uno {
         }
         return false;
     }
+
     public void addToTalon(Carte carte) {talon.ajouter(carte);}
 }
