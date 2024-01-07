@@ -68,36 +68,50 @@ public class DialogueLigneDeCommande {
      */
     public void reagir(){
         if (uno.estFini()){
-            System.out.println(gras + souligne + "Le jeu est fini voici les scores" + reset);
-            for (int i = 0; i < uno.getNbJoueurs(); i++) {
-                System.out.println("Le joueur " + uno.getJoueur(i).getNom() + " a un score de " + uno.getJoueur(i).getScore());
-            }
-        }else {
+            afficherScores();
+        } else {
             uno.refreshPioche();
             System.out.println(gras + souligne + "C'est au tour de " +
                     uno.getJoueur(uno.getJoueurQuiJoue()).getNom() + " de jouer" +
                     "il a " + uno.getJoueur(uno.getJoueurQuiJoue()).getNombreDeCartes() + " cartes" +
                     reset);
-            if(uno.joueurHumainQuiJoue()){
-                System.out.println("Voici votre main : \n" + uno.getJoueur(uno.getJoueurQuiJoue()).getMain().toString());
-                System.out.println(gras +"La carte sur le talon est : " + uno.getTalon().getSommet() + reset);
-                Scanner sc = new Scanner(System.in);
-                String coup = sc.next();
-                if (coup.equals("p4") || coup.equals("j")){ // si le joueur joue un plus 4 ou un joker
-                    coup = choisirCouleur(coup); // on lui demande de choisir une couleur
-                }
-                uno.getJoueur(uno.getJoueurQuiJoue()).jouer(coup);
-                uno.choisirJoueurQuiJoue(); // on passe au joueur suivant
-            }else if( !uno.joueurHumainQuiJoue()){ // si c'est un bot qui joue
-                Carte sommetTalon = uno.getTalon().getSommet();
-                uno.getJoueur(uno.getJoueurQuiJoue()).jouer("");
-                if (sommetTalon != uno.getTalon().getSommet()){
-                    System.out.println("Le joueur " + uno.getJoueur(uno.getJoueurQuiJoue()).getNom() + " a joué la carte " + uno.getTalon().getSommet());
-                }else{
-                    System.out.println("Le joueur " + uno.getJoueur(uno.getJoueurQuiJoue()).getNom() + " a pioché");
-                }
-                uno.choisirJoueurQuiJoue(); // on passe au joueur suivant
+
+            if (uno.joueurHumainQuiJoue()){
+                jouerCarteHumain();
+            } else {
+                jouerCarteBot();
             }
+
+            uno.choisirJoueurQuiJoue(); // on passe au joueur suivant
         }
     }
+
+    private void afficherScores() {
+        System.out.println(gras + souligne + "Le jeu est fini voici les scores" + reset);
+        for (int i = 0; i < uno.getNbJoueurs(); i++) {
+            System.out.println("Le joueur " + uno.getJoueur(i).getNom() + " a un score de " + uno.getJoueur(i).getScore());
+        }
+    }
+
+    private void jouerCarteHumain() {
+        System.out.println("Voici votre main : \n" + uno.getJoueur(uno.getJoueurQuiJoue()).getMain().toString());
+        System.out.println(gras +"La carte sur le talon est : " + uno.getTalon().getSommet() + reset);
+        Scanner sc = new Scanner(System.in);
+        String coup = sc.next();
+        if (coup.equals("p4") || coup.equals("j")) {
+            coup = choisirCouleur(coup);
+        }
+        uno.getJoueur(uno.getJoueurQuiJoue()).jouer(coup);
+    }
+
+    private void jouerCarteBot() {
+        Carte sommetTalon = uno.getTalon().getSommet();
+        uno.getJoueur(uno.getJoueurQuiJoue()).jouer("");
+        if (sommetTalon != uno.getTalon().getSommet()) {
+            System.out.println("Le joueur " + uno.getJoueur(uno.getJoueurQuiJoue()).getNom() + " a joué la carte " + uno.getTalon().getSommet());
+        } else {
+            System.out.println("Le joueur " + uno.getJoueur(uno.getJoueurQuiJoue()).getNom() + " a pioché");
+        }
+    }
+
 }

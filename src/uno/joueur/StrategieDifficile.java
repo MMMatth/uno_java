@@ -9,7 +9,6 @@ import java.util.Iterator;
 public class StrategieDifficile implements Strategie {
     @Override
     public void jouer(PaquetDeCartes main, Uno uno) throws Exception {
-        System.out.println(main);
         Iterator<Carte> it = main.iterator(); // Utilisez iterator() pour obtenir un itérateur sur la liste
         Carte sommetTalon = uno.getTalon().getSommet(); // Utilisez getSommet() pour obtenir le sommet de la pile
         int score = 0;
