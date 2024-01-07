@@ -22,15 +22,30 @@ public class DialogueLigneDeCommande {
      * @param u instance de Uno
      */
     public DialogueLigneDeCommande(Uno u) {
+        int nbJoueurs, difficulte;
         this.uno = u;
         System.out.println(gras + souligne + "Bienvenue dans le jeu Uno" + reset);
-        System.out.println("Veuillez choisir le nombre de joueurs");
         Scanner sc = new Scanner(System.in);
-        int nbJoueurs = sc.nextInt();
+        do {
+            System.out.println("Veuillez choisir le nombre de joueurs");
+            while (!sc.hasNextInt()) { // tant que l'utilisateur n'a pas entré un entier
+                System.out.println("Veuillez entrer un nombre entier.");
+                sc.next();
+            }
+            nbJoueurs = sc.nextInt();
+        } while (nbJoueurs < 2 || nbJoueurs > 10);
         System.out.println("Veuillez choisir un nom");
-        String nom = sc.next();
+        String nomJoueurHumain = sc.next();
+        do {
+            System.out.println("Veuillez choisir la difficulté 0 pour facile, 1 pour difficile");
+            while (!sc.hasNextInt()) { // tant que l'utilisateur n'a pas entré un entier
+                System.out.println("Veuillez entrer un nombre entier.");
+                sc.next();
+            }
+            difficulte = sc.nextInt();
+        }while (difficulte != 0 && difficulte != 1);
         uno.setDialogue(this);
-        uno.initialiser(nbJoueurs, nom);
+        uno.initialiser(nbJoueurs, nomJoueurHumain, difficulte);
     }
 
     /**

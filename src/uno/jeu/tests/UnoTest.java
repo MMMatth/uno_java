@@ -14,13 +14,13 @@ class UnoTest {
     }
     @Test
     void initJoueurs() {
-        uno.initJoueurs(4, "Nom du Joueur");
+        uno.initJoueurs(4, "Nom du Joueur", 0);
         assertEquals(4, uno.getNbJoueurs(), "initJoueurs() ne renvoie pas la bonne valeur");
     }
 
     @Test
     void choisirJoueurQuiJoue() {
-        uno.initJoueurs(4, "Nom du Joueur");
+        uno.initJoueurs(4, "Nom du Joueur", 0);
         uno.chosirJoueurQuiDistribue();
         uno.choisirJoueurQuiJoue();
         assertEquals(uno.getJoueurQuiJoue(),uno.getJoueurQuiDistribue() + 1 % uno.getNbJoueurs(), "choisirJoueurQuiJoue() ne renvoie pas la bonne valeur");
@@ -28,7 +28,7 @@ class UnoTest {
 
     @Test
     void chosirJoueurQuiDistribue() {
-        uno.initJoueurs(4, "Nom du Joueur");
+        uno.initJoueurs(4, "Nom du Joueur", 0);
         uno.chosirJoueurQuiDistribue();
         assertTrue(uno.getJoueurQuiDistribue() >= 0 && uno.getJoueurQuiDistribue() < uno.getNbJoueurs(), "chosirJoueurQuiDistribue() ne renvoie pas la bonne valeur");
     }

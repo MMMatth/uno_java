@@ -1,10 +1,9 @@
 package uno.joueur;
 
-import uno.cartes.Carte;
 import uno.jeu.Uno;
 
 public class Bot extends Joueur{
-    private Strategie strategie;
+    private final Strategie strategie;
     public Bot(Uno uno, String nom, int id, int difficulte) {
         super(uno, nom, id);
         if (difficulte == 0){
