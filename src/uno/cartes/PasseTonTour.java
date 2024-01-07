@@ -52,7 +52,7 @@ public class PasseTonTour extends Carte{
     }
     @Override
     public boolean peutEtrePoseeSur(ChangementDeSens c){
-        return c.estDeCouleurCompatibleAvec(this);
+        return true;
     }
 
     @Override

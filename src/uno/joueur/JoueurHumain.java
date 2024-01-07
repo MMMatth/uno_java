@@ -36,7 +36,6 @@ public class JoueurHumain extends Joueur{
                 return new Chiffre(this.uno, couleur, Integer.parseInt(parts[1]));
             case "p4":
                 couleur = choisirCouleur(parts[1]);
-                System.out.println(coup + parts[1] + couleur);
                 if (couleur == null) {
                     throw (new CoupIncorrect("Couleur incorrecte pour le plus 4"));
                 }
@@ -86,7 +85,6 @@ public class JoueurHumain extends Joueur{
                         if (sommetTalon.peutEtreRecouvertePar(carteVoulue)) {
                             carteVoulue.appliquerEffet();
                             this.uno.addToTalon(carteVoulue);
-                            System.out.println("Vous avez joué la carte " + carteVoulue + " sur le talon");
                             main.enlever(carteVoulue);
                         }else {
                             throw (new CoupIncorrect("Carte non jouable sur le talon"));

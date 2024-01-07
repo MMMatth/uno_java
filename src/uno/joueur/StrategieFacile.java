@@ -12,7 +12,6 @@ public class StrategieFacile implements Strategie {
             while (main.hasNext()) { // on parcourt la main du bot
                 Carte carte = main.getSommet();
                 if (sommetTalon.peutEtreRecouvertePar(carte) && !aJoue) {
-                    System.out.println("Le bot a joué la carte " + carte + " sur le talon ");
                     carte.appliquerEffet();
                     uno.addToTalon(carte);
                     main.enlever(carte);
@@ -22,9 +21,10 @@ public class StrategieFacile implements Strategie {
                 }
             }
             if (!aJoue){
-                System.out.println("Le bot a pioché une carte");
                 main.ajouter(uno.getPioche().piocher());
             }
+        }else{
+            throw (new Exception("Le talon est vide"));
         }
     }
 }

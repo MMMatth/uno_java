@@ -37,7 +37,7 @@ public class Plus2 extends Carte{
     }
     @Override
     public boolean peutEtrePoseeSur(Plus2 c){
-        return c.estDeCouleurCompatibleAvec(this);
+        return true;
     }
     @Override
     public boolean peutEtrePoseeSur(Plus4 c){

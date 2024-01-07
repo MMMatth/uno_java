@@ -36,7 +36,7 @@ public class Chiffre extends Carte{
 
     @Override
     public boolean peutEtrePoseeSur(Chiffre c){
-        return c.estDeCouleurCompatibleAvec(this);
+        return c.estDeCouleurCompatibleAvec(this) || c.getValeur() == valeur;
     }
     @Override
     public boolean peutEtrePoseeSur(Plus2 c){
