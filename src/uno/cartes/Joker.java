@@ -1,15 +1,12 @@
 package uno.cartes;
 import uno.jeu.Uno;
-
+import java.util.Random;
 public class Joker extends Carte {
     public  Joker(Uno u) {
         super(u);
         this.couleur = null;
     }
 
-    public Joker(Uno u, Couleur c) {
-        super(u, c);
-    }
     @Override
     public int getValeur() {
         return 50;
@@ -86,12 +83,23 @@ public class Joker extends Carte {
 
     @Override
     public void appliquerEffet() {
-        if (u.getJoueurQuiJoue() == u.getNbJoueurs() - 1){
-            // on demande au joueur la couleur qu'il veut
-            this.couleur = Couleur.BLEU;
-
-        }else {
-            this.couleur = Couleur.VERT;
+        if (couleur == null){
+            Random random = new Random();
+            int choix = random.nextInt(4);
+            switch (choix){
+                case 0:
+                    couleur = Couleur.BLEU;
+                    break;
+                case 1:
+                    couleur = Couleur.ROUGE;
+                    break;
+                case 2:
+                    couleur = Couleur.VERT;
+                    break;
+                case 3:
+                    couleur = Couleur.JAUNE;
+                    break;
+            }
         }
     }
 }

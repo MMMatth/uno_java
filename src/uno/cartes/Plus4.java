@@ -7,9 +7,6 @@ public class Plus4 extends Carte {
         super(u);
         couleur = null;
     }
-    public Plus4(Uno u, Couleur c) {
-        super(u, c);
-    }
     @Override
     public int getValeur() {
         return 50;

@@ -21,17 +21,18 @@ public class DialogueLigneDeCommande {
         System.out.println("Veuillez choisir un nom");
         String nom = sc.next();
         uno.setDialogue(this);
-        uno.initialiser(nbJoueurs);
+        uno.initialiser(nbJoueurs, nom);
     }
 
     public void reagir(){
+    uno.refreshPioche();
      if (uno.estFini()){
             System.out.println(gras + souligné + "Le jeu est fini voici les scores" + reset);
             for (int i = 0; i < uno.getNbJoueurs(); i++) {
                 System.out.println("Le joueur " + uno.getJoueur(i).getNom() + " a un score de " + uno.getJoueur(i).getScore());
             }
      }else if(uno.getJoueurQuiJoue() == uno.getNbJoueurs() - 1){
-        System.out.println(gras + souligné +  "C'est à votre tour de jouer" + reset); // TO DO : preciser ulterieuement le nom du joueur
+         System.out.println(gras + souligné + "C'est au tour de " + uno.getJoueur(uno.getJoueurQuiJoue()).getNom() + " de jouer" + reset);
         System.out.println("Voici votre main : \n" + uno.getJoueur(uno.getJoueurQuiJoue()).getMain().toString());
         System.out.println(gras +"La carte sur le talon est : " + uno.getTalon().getSommet() + reset);
         Scanner sc = new Scanner(System.in);
@@ -43,7 +44,7 @@ public class DialogueLigneDeCommande {
         }
         uno.getJoueur(uno.getJoueurQuiJoue()).jouer(coup);
      }else if(uno.getJoueurQuiJoue() != uno.getNbJoueurs() - 1){
-        System.out.println(gras + souligné + "C'est au tour de " + uno.getJoueur(uno.getJoueurQuiJoue()).getNom() + " de jouer" + reset);
+         System.out.println(gras + souligné + "C'est au tour de " + uno.getJoueur(uno.getJoueurQuiJoue()).getNom() + " de jouer" + reset);
         System.out.println(gras + "La carte sur le talon est : " + uno.getTalon().getSommet() + reset);
         uno.getJoueur(uno.getJoueurQuiJoue()).jouer("");
      }

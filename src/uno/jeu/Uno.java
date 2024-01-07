@@ -16,12 +16,12 @@ public class Uno {
     private DialogueLigneDeCommande dialogue;
     public Uno() {
     }
-    public void initJoueurs(int nbJoueurs) {
+    public void initJoueurs(int nbJoueurs, String nomJoueur) {
         joueurs = new ArrayList<Joueur>();
         for (int i = 0; i < nbJoueurs - 1; i++) {
             joueurs.add(new Bot(this, "Bot " + i, i, 0) );
         }
-        joueurs.add(new JoueurHumain(this, "Joueur", nbJoueurs));
+        joueurs.add(new JoueurHumain(this, nomJoueur, nbJoueurs));
     }
 
     public void setDialogue(DialogueLigneDeCommande dialogue) {
@@ -29,7 +29,7 @@ public class Uno {
     }
 
     public void choisirJoueurQuiJoue() {
-        joueurQuiJoue = (joueurQuiJoue + 1) % (joueurs.size());
+        changeDeJoueur();
         dialogue.reagir();
     }
 
@@ -50,6 +50,17 @@ public class Uno {
         talon = fabriqueCartes.getPaquetVide();
     }
 
+    public void refreshPioche(){
+        if (pioche.estVide()){
+            System.out.println("\033[H\033[2J" + "dzefz" + "\033[H\033[2J");
+            Carte derniereCarte = talon.getSommet();
+            talon.enlever(derniereCarte);
+            pioche = talon;
+            talon = FabriqueCartes.getInstance().getPaquetVide();
+            talon.ajouter(derniereCarte);
+        }
+    }
+
     public void dirstribuerCarte(){
         for (int i = 0; i < 7; i++) {
             for (Joueur joueur : joueurs) {
@@ -61,11 +72,10 @@ public class Uno {
     public void initSenseHoraire(boolean sensHoraire){
         this.sensHoraire = sensHoraire;
     }
-    public void initialiser(int nbrBots) {
-        initJoueurs(nbrBots);
+    public void initialiser(int nbrBots, String nomJoueur) {
+        initJoueurs(nbrBots, nomJoueur);
         chosirJoueurQuiDistribue();
-        System.out.println("joueur qui distribue : " + joueurQuiDistribue);
-        this.joueurQuiJoue = joueurQuiDistribue + 1 % (joueurs.size() - 1);
+        joueurQuiJoue = joueurQuiDistribue + 1 % (joueurs.size() - 1);
         initSenseHoraire(true);
         initPioche();
         initTalon();
@@ -81,15 +91,19 @@ public class Uno {
     /** fonction qui permet de sauter le tour du joueur suivant */
     public void changeDeJoueur(){
         if (sensHoraire){
-            joueurQuiJoue = (joueurQuiJoue + 1) % joueurs.size();}
-        else {
-            joueurQuiJoue = (joueurQuiJoue - 1) % joueurs.size();
+            joueurQuiJoue = (joueurQuiJoue + 1) % joueurs.size();
+        }else {
+            if (joueurQuiJoue == 0){
+                joueurQuiJoue = joueurs.size() - 1;
+            }
+            else {
+                joueurQuiJoue = (joueurQuiJoue - 1) % joueurs.size();
+            }
         }
     }
 
     /** fonction qui permet de donner des cartes au joueur suivant */
     public void donnerCarteAuJoueurSuivant(int nbCartes){
-        System.out.println("Le joueur " + joueurs.get((joueurQuiJoue + 1) % joueurs.size()).getNom() + " pioche " + nbCartes + " cartes");
         for (int i = 0; i < nbCartes; i++) {
             if (sensHoraire){
                 joueurs.get((joueurQuiJoue + 1) % joueurs.size()).piocher();
