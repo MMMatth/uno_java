@@ -34,18 +34,12 @@ public abstract class Carte {
         if (couleur == null) {
             return "\u001B[37m";
         }else{
-            switch (couleur) {
-                case ROUGE:
-                    return "\u001B[31m";
-                case BLEU:
-                    return "\u001B[34m";
-                case VERT:
-                    return  "\u001B[32m";
-                case JAUNE:
-                    return "\u001B[33m";
-                default:
-                    return "\u001B[37m";
-            }
+            return switch (couleur) {
+                case ROUGE -> "\u001B[31m";
+                case BLEU -> "\u001B[34m";
+                case VERT -> "\u001B[32m";
+                case JAUNE -> "\u001B[33m";
+            };
         }
     }
     public abstract String toString();

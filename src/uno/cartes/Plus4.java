@@ -1,6 +1,8 @@
 package uno.cartes;
 import uno.jeu.Uno;
 
+import java.util.Random;
+
 
 public class Plus4 extends Carte {
     public Plus4(Uno u) {
@@ -75,6 +77,24 @@ public class Plus4 extends Carte {
 
     @Override
     public void appliquerEffet() {
+        if (couleur == null){
+            Random random = new Random();
+            int choix = random.nextInt(4);
+            switch (choix){
+                case 0:
+                    couleur = Couleur.BLEU;
+                    break;
+                case 1:
+                    couleur = Couleur.ROUGE;
+                    break;
+                case 2:
+                    couleur = Couleur.VERT;
+                    break;
+                case 3:
+                    couleur = Couleur.JAUNE;
+                    break;
+            }
+        }
         u.donnerCarteAuJoueurSuivant(4);
         u.changeDeJoueur();
     }

@@ -102,9 +102,7 @@ public class JoueurHumain extends Joueur{
                 System.out.println(e.getMessage());
             }
         }
-        if (!rejouer) {
-            this.uno.choisirJoueurQuiJoue();
-        }else {
+        if (rejouer) {
             this.uno.joueurRejoue();
         }
     }

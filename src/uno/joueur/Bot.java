@@ -20,6 +20,5 @@ public class Bot extends Joueur{
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        uno.choisirJoueurQuiJoue();
     }
 }

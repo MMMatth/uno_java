@@ -12,6 +12,22 @@ import java.util.Scanner;
 public class PaquetDeCartes implements Iterator<Carte>{
     private final ArrayList<Carte> paquet;
     private int index;
+    public Iterator<Carte> iterator() {
+        index = 0; // Réinitialiser l'index avant de démarrer l'itération
+        return paquet.iterator();
+    }
+
+    public Carte next() {
+        if (index < paquet.size()) {
+            return paquet.get(index++);
+        } else {
+            return null; // Ou lancez une exception pour indiquer la fin des cartes
+        }
+    }
+
+    public boolean hasNext() {
+        return index < paquet.size();
+    }
 
     public PaquetDeCartes() {
         paquet = new ArrayList<Carte>();
@@ -21,19 +37,6 @@ public class PaquetDeCartes implements Iterator<Carte>{
         paquet = new ArrayList<Carte>();
         index = 0;
         ajouter(pdc);
-    }
-
-    @Override
-    public boolean hasNext() {
-        return index < paquet.size();
-    }
-
-    @Override
-    public Carte next() {
-        if (!hasNext()) {
-            throw new java.util.NoSuchElementException();
-        }
-        return paquet.get(index++);
     }
 
     public int getNombreDeCartes() {

@@ -149,8 +149,8 @@ public class Uno {
         dirstribuerCarte();
         this.dialogue.reagir(); // on démarre le jeu
     }
-    /* carte actions */
 
+    /* Effet des cartes */
     /**
      * @brief Fonction qui permet de changer le sens du jeu
      */
@@ -200,6 +200,9 @@ public class Uno {
     public PaquetDeCartes getTalon() {return talon;}
     public Joueur getJoueur(int i) {
         return joueurs.get(i);
+    }
+    public boolean joueurHumainQuiJoue() {
+        return getJoueurQuiJoue() == getNbJoueurs() - 1;
     }
 
     /**

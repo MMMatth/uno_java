@@ -31,7 +31,7 @@ public class Chiffre extends Carte{
     }
     @Override
     public boolean estDeCouleurCompatibleAvec(Carte c){
-        return c.getCouleur() == couleur;
+        return c.getCouleur() == this.couleur;
     }
 
     @Override
