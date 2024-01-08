@@ -66,8 +66,17 @@ public class Uno {
      * @brief Fonction qui permet de refaire jouer un joueur
      * @details Fonction qui permet de refaire jouer un joueur par exemple dans le cas ou le joueur se trompe de carte
      */
-    public void joueurRejoue() {
-        dialogue.reagir();
+    public void joueurAvant() {
+        if (sensHoraire){
+            if (joueurQuiJoue == 0){
+                joueurQuiJoue = joueurs.size() - 1;
+            }
+            else {
+                joueurQuiJoue = (joueurQuiJoue - 1) % (joueurs.size() - 1);
+            }
+        }else {
+            joueurQuiJoue = (joueurQuiJoue + 1) % (joueurs.size() - 1);
+        }
     }
 
     /**

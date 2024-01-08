@@ -115,9 +115,8 @@ public class JoueurHumain extends Joueur{
                 System.out.println(e.getMessage());
             }
         }
-
         if (rejouer) {
-            this.uno.joueurRejoue();
+            uno.joueurAvant();
         }
     }
 
