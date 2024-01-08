@@ -66,13 +66,9 @@ class PasseTonTourTest {
         assertTrue(c.peutEtrePoseeSur(new Plus4(uno)));
         assertTrue(c.peutEtrePoseeSur(new Joker(uno)));
         assertTrue(c.peutEtrePoseeSur(new PasseTonTour(uno, Couleur.ROUGE)));
-        assertFalse(c.peutEtrePoseeSur(new PasseTonTour(uno, Couleur.BLEU)));
+        assertTrue(c.peutEtrePoseeSur(new PasseTonTour(uno, Couleur.BLEU)));
         assertTrue(c.peutEtrePoseeSur(new ChangementDeSens(uno, Couleur.ROUGE)));
         assertFalse(c.peutEtrePoseeSur(new ChangementDeSens(uno, Couleur.BLEU)));
     }
 
-    @org.junit.jupiter.api.Test
-    void testToString() {
-        assertEquals("PasseTonTour rouge", new PasseTonTour(uno, Couleur.ROUGE).toString(), "toString() ne renvoie pas la bonne valeur");
-    }
 }

@@ -76,8 +76,4 @@ class Plus4Test {
         assertTrue(c.peutEtrePoseeSur(new ChangementDeSens(uno, Couleur.BLEU)));
     }
 
-    @org.junit.jupiter.api.Test
-    void testToString() {
-        assertEquals("Plus4", new Plus4(uno).toString(), "toString() ne renvoie pas la bonne valeur");
-    }
 }

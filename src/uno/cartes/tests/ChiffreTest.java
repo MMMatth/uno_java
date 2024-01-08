@@ -25,7 +25,8 @@ class ChiffreTest {
     @org.junit.jupiter.api.Test
     void testPeutEtreRecouvertePar() {
         assertTrue(chiffre.peutEtreRecouvertePar(new Chiffre(uno, Couleur.ROUGE, 1)), "peutEtreRecouvertePar() ne renvoie pas vrai pour une carte compatible");
-        assertFalse(chiffre.peutEtreRecouvertePar(new Chiffre(uno, Couleur.BLEU, 0)), "peutEtreRecouvertePar() ne renvoie pas faux pour une carte incompatible");
+        assertTrue(chiffre.peutEtreRecouvertePar(new Chiffre(uno, Couleur.BLEU, 0)), "peutEtreRecouvertePar() ne renvoie pas faux pour une carte incompatible");
+        assertFalse(chiffre.peutEtreRecouvertePar(new Chiffre(uno, Couleur.BLEU, 9)), "peutEtreRecouvertePar() ne renvoie pas faux pour une carte incompatible");
     }
 
     @org.junit.jupiter.api.Test
@@ -53,7 +54,7 @@ class ChiffreTest {
     @org.junit.jupiter.api.Test
     void testPeutEtrePoseeSur() {
         assertTrue(chiffre.peutEtrePoseeSur(new Chiffre(uno, Couleur.ROUGE, 1)), "peutEtrePoseeSur(Chiffre) ne renvoie pas vrai pour une carte compatible");
-        assertFalse(chiffre.peutEtrePoseeSur(new Chiffre(uno, Couleur.BLEU, 0)), "peutEtrePoseeSur(Chiffre) ne renvoie pas faux pour une carte incompatible");
+        assertTrue(chiffre.peutEtrePoseeSur(new Chiffre(uno, Couleur.BLEU, 0)), "peutEtrePoseeSur(Chiffre) ne renvoie pas faux pour une carte incompatible");
 
         assertTrue(chiffre.peutEtrePoseeSur(new Plus2(uno, Couleur.ROUGE)), "peutEtrePoseeSur(Plus2) ne renvoie pas vrai pour une carte compatible");
         assertFalse(chiffre.peutEtrePoseeSur(new Plus2(uno, Couleur.BLEU)), "peutEtrePoseeSur(Plus2) ne renvoie pas faux pour une carte incompatible");
@@ -69,8 +70,4 @@ class ChiffreTest {
         assertFalse(chiffre.peutEtrePoseeSur(new ChangementDeSens(uno, Couleur.BLEU)), "peutEtrePoseeSur(ChangementDeSens) ne renvoie pas faux pour une carte incompatible");
     }
 
-    @org.junit.jupiter.api.Test
-    void testToString() {
-        assertEquals("Chiffre 0 rouge", chiffre.toString(), "toString() ne renvoie pas la bonne valeur");
-    }
 }

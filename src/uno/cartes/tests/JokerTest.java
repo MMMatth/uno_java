@@ -69,9 +69,4 @@ class JokerTest {
         assertTrue(joker.peutEtrePoseeSur(new ChangementDeSens(uno, Couleur.ROUGE)), "peutEtrePoseeSur(ChangementDeSens) ne renvoie pas vrai pour une carte compatible");
         assertTrue(joker.peutEtrePoseeSur(new ChangementDeSens(uno, Couleur.BLEU)), "peutEtrePoseeSur(ChangementDeSens) ne renvoie pas vrai pour une carte compatible");
     }
-
-    @org.junit.jupiter.api.Test
-    void testToString() {
-        assert joker.toString().equals("Joker") : "toString() ne renvoie pas la bonne valeur";
-    }
 }

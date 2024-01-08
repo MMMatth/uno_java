@@ -9,14 +9,26 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Scanner;
 
+/**
+ * @brief Classe représentant un paquet de cartes
+ * */
 public class PaquetDeCartes implements Iterator<Carte>{
-    private final ArrayList<Carte> paquet;
-    private int index;
+    private final ArrayList<Carte> paquet; /** < Liste des cartes du paquet */
+    private int index; /** < Index de l'itérateur */
+    /**
+     * @brief fonction pour recuperer l'itérateur
+     * @return l'itérateur
+     */
     public Iterator<Carte> iterator() {
         index = 0; // Réinitialiser l'index avant de démarrer l'itération
         return paquet.iterator();
     }
 
+    /**
+     * fonction pour definir la prochaine carte
+     * @return la prochaine carte
+     */
+    @Override
     public Carte next() {
         if (index < paquet.size()) {
             return paquet.get(index++);
@@ -25,14 +37,27 @@ public class PaquetDeCartes implements Iterator<Carte>{
         }
     }
 
+    /**
+     * fonction pour savoir si il y a une prochaine carte
+     * @return true si il y a une prochaine carte, false sinon
+     */
+    @Override
     public boolean hasNext() {
         return index < paquet.size();
     }
 
+    /**
+     * @brief Constructeur de la classe PaquetDeCartes
+     */
     public PaquetDeCartes() {
         paquet = new ArrayList<Carte>();
         index = 0;
     }
+
+    /**
+     * @brief Constructeur de la classe PaquetDeCartes
+     * @param pdc Paquet de cartes
+     */
     public PaquetDeCartes(PaquetDeCartes pdc){
         paquet = new ArrayList<Carte>();
         index = 0;
@@ -43,10 +68,19 @@ public class PaquetDeCartes implements Iterator<Carte>{
         return paquet.size();
     }
 
+    /**
+     * @brief fonction qui permet d'ajouter une (des) carte(s) au paquet
+     * @param cartes carte(s) a ajouter
+     */
     public void ajouter(Carte... cartes) {
         Collections.addAll(paquet, cartes);
     }
 
+    /**
+     * @brief fonction qui permet de savoir si le paquet contient une carte
+     * @param carte carte a chercher
+     * @return true si le paquet contient la carte, false sinon
+     */
     public boolean contient(Carte carte) {
         // on compare donnée par donnée par rapport a la classe
         switch (carte.getClass().getSimpleName()) {
@@ -107,6 +141,10 @@ public class PaquetDeCartes implements Iterator<Carte>{
         return getNombreDeCartes() == 0;
     }
 
+    /**
+     * @brief fonction qui renvoie la somme des valeurs des cartes du paquet
+     * @return la somme des valeurs des cartes du paquet
+     */
     public int getValeur() {
         int valeur = 0;
         for (Carte carte : paquet) {
@@ -115,6 +153,17 @@ public class PaquetDeCartes implements Iterator<Carte>{
         return valeur;
     }
 
+    /**
+     * @brief fonction qui permet de vider le paquet
+     */
+    public void vider() {
+        paquet.clear();
+    }
+
+    /**
+     * @brief fonction pour recuper la chaine de caractere du paquet
+     * @return la chaine de caractere du paquet
+     */
     public String toString() {
         StringBuilder str = new StringBuilder();
         for (Carte carte : paquet) {
@@ -124,6 +173,10 @@ public class PaquetDeCartes implements Iterator<Carte>{
     }
 
 
+    /**
+     * @brief fonction qui permet d'ajoouter un paquet de carte au paquet
+     * @param pdc paquet de carte a ajouter
+     */
     public void ajouter(PaquetDeCartes pdc) {
         paquet.addAll(pdc.paquet);
     }
@@ -146,24 +199,43 @@ public class PaquetDeCartes implements Iterator<Carte>{
         }
     }
 
+    /**
+     * @brief fonction qui permet de melanger le paquet
+     */
     public void melanger() {
         Collections.shuffle(paquet);
     }
 
+    /**
+     * @brief fonction qui permet de retourner le paquet
+     */
     public void retourner() {
         Collections.reverse(paquet);
     }
 
+    /**
+     * @brief fonction qui permet de recuperer la carte au sommet du paquet
+     * @return la carte au sommet du paquet
+     */
     public Carte getSommet() {
         return paquet.get(paquet.size() - 1);
     }
 
+    /**
+     * @brief fonction qui permet de piocher une carte (renvoyer la carte + la supprimer du paquet)
+     * @return la carte piochée
+     */
     public Carte piocher() {
         Carte carte = getSommet();
         paquet.remove(carte);
         return carte;
     }
 
+    /**
+     * @brief fonction qui permet d'ecrire un paquet de carte dans un fichier
+     * @param nomDeFichier nom du fichier
+     * @throws ErreurFichier si il y a une erreur lors de l'ecriture du fichier
+     */
     public void ecrire(String nomDeFichier) throws ErreurFichier {
         try {
             PrintWriter writer = new PrintWriter(nomDeFichier);
@@ -180,6 +252,10 @@ public class PaquetDeCartes implements Iterator<Carte>{
         }
     }
 
+    /**
+     * @brief fonction qui permet de recuperer le code correspondant aux cartes du paquet
+     * @return le code correspondant aux cartes du paquet
+     */
     public String getCode() {
         StringBuilder codeBuilder = new StringBuilder();
 
@@ -230,6 +306,7 @@ public class PaquetDeCartes implements Iterator<Carte>{
 
 
 
+
     public Couleur choisirCouleur(String couleur){
         return switch (couleur) {
             case "r" -> Couleur.ROUGE;
@@ -239,6 +316,12 @@ public class PaquetDeCartes implements Iterator<Carte>{
             default -> null;
         };
     }
+
+    /**
+     * @brief fonction qui permet de lire un paquet de carte depuis un fichier
+     * @param nomDeFichier nom du fichier
+     * @throws ErreurFichier si il y a une erreur lors de la lecture du fichier
+     */
     public void lire(String nomDeFichier) throws  ErreurFichier{
         try {
             Scanner scanner = new Scanner(new File(nomDeFichier));

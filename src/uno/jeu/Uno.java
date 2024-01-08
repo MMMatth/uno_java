@@ -33,7 +33,7 @@ public class Uno {
      * @param nomJoueur nom du joueur humain
      * @throws IllegalArgumentException si le nombre de joueurs est inferieur a 2 ou superieur a 10
      */
-    public void initJoueurs(int nbJoueurs, String nomJoueur, int difficulte) throws IllegalArgumentException{
+    public void initJoueurs(int nbJoueurs, String nomJoueur) throws IllegalArgumentException{
         joueurs = new ArrayList<Joueur>();
         if (nbJoueurs < 2) {
             throw new IllegalArgumentException("Il faut au moins 2 joueurs");
@@ -42,7 +42,7 @@ public class Uno {
             throw new IllegalArgumentException("Il faut au plus 10 joueurs");
         }
         for (int i = 0; i < nbJoueurs - 1; i++) {
-            joueurs.add(new Bot(this, "Bot " + i, i, difficulte) );
+            joueurs.add(new Bot(this, "Bot " + i, i, this.difficulte) );
         }
         joueurs.add(new JoueurHumain(this, nomJoueur, nbJoueurs));
     }
@@ -56,11 +56,10 @@ public class Uno {
     }
 
     /**
-     * @brief Fonction qui permet de choisir le joueur qui joue
+     * @brief Fonction qui permet de choisir le joueur qui joue en premier
      */
     public void choisirJoueurQuiJoue() {
-        changeDeJoueur();
-        dialogue.reagir();
+        this.joueurQuiJoue = (joueurQuiDistribue + 1) % (joueurs.size() - 1); // le joueur qui joue est le joueur apres le joueur qui distribue
     }
 
     /**
@@ -76,9 +75,8 @@ public class Uno {
      * @details cette fonction utilise un random pour choisir le joueur qui distribue aleatoirement parmis les joueurs
      */
     public void chosirJoueurQuiDistribue() {
-        Random random = new Random();
-        int ran = random.nextInt(joueurs.size()); // entier entre 1 et nbJoueurs
-        joueurQuiDistribue = ran - 1;
+        Random rand = new Random();
+        this.joueurQuiDistribue = rand.nextInt(joueurs.size() - 1); // on choisit un joueur au hasard
     }
 
 
@@ -139,10 +137,10 @@ public class Uno {
      * @param nbrBots nombre de bots
      * @param nomJoueur nom du joueur humain
      */
-    public void initialiser(int nbrBots, String nomJoueur, int difficulte) {
-        initJoueurs(nbrBots, nomJoueur, difficulte);
+    public void initialiser(int nbrBots, String nomJoueur) {
+        initJoueurs(nbrBots, nomJoueur);
         chosirJoueurQuiDistribue();
-        joueurQuiJoue = joueurQuiDistribue + 1 % (joueurs.size() - 1); // le joueur qui joue est le joueur apres le joueur qui distribue
+        choisirJoueurQuiJoue();
         initSenseHoraire(true); // le sens du jeu est horaire
         initPioche();
         initTalon();
@@ -191,7 +189,6 @@ public class Uno {
         }
     }
 
-    /* getters */
     public int getNbJoueurs() {return joueurs.size();}
     public int getJoueurQuiDistribue() {return joueurQuiDistribue;}
     public int getJoueurQuiJoue() {return joueurQuiJoue;}
@@ -204,6 +201,9 @@ public class Uno {
     public boolean joueurHumainQuiJoue() {
         return getJoueurQuiJoue() == getNbJoueurs() - 1;
     }
+    public int getDifficulte() {return difficulte;}
+    public void setDifficulte(int difficulte) { this.difficulte = difficulte; }
+
 
     /**
      * @brief Fonction qui permet de recuperer les scores des joueurs

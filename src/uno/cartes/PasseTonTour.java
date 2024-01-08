@@ -48,11 +48,11 @@ public class PasseTonTour extends Carte{
     }
     @Override
     public boolean peutEtrePoseeSur(PasseTonTour c){
-        return c.estDeCouleurCompatibleAvec(this);
+        return true;
     }
     @Override
     public boolean peutEtrePoseeSur(ChangementDeSens c){
-        return true;
+        return c.estDeCouleurCompatibleAvec(this);
     }
 
     @Override

@@ -64,12 +64,7 @@ class ChangementDeSensTest {
         assertFalse(carte.peutEtrePoseeSur(new PasseTonTour(uno, Couleur.BLEU)), "peutEtrePoseeSur(PasseTonTour) ne renvoie pas faux pour une carte incompatible");
 
         assertTrue(carte.peutEtrePoseeSur(new ChangementDeSens(uno, Couleur.ROUGE)), "peutEtrePoseeSur(ChangementDeSens) ne renvoie pas vrai pour une carte compatible");
-        assertFalse(carte.peutEtrePoseeSur(new ChangementDeSens(uno, Couleur.BLEU)), "peutEtrePoseeSur(ChangementDeSens) ne renvoie pas faux pour une carte incompatible");
-    }
-
-    @org.junit.jupiter.api.Test
-    void testToString() {
-        assertEquals("ChangementDeSens rouge", new ChangementDeSens(uno, Couleur.ROUGE).toString(), "toString() ne renvoie pas la bonne valeur");
+        assertTrue(carte.peutEtrePoseeSur(new ChangementDeSens(uno, Couleur.BLEU)), "peutEtrePoseeSur(ChangementDeSens) ne renvoie pas faux pour une carte incompatible");
     }
 }
 

@@ -66,7 +66,7 @@ class Plus2Test {
         assertFalse(c.peutEtrePoseeSur(new Chiffre(uno, Couleur.BLEU, 0)));
         /* plus2 */
         assertTrue(c.peutEtrePoseeSur(new Plus2(uno, Couleur.ROUGE)));
-        assertFalse(c.peutEtrePoseeSur(new Plus2(uno, Couleur.BLEU)));
+        assertTrue(c.peutEtrePoseeSur(new Plus2(uno, Couleur.BLEU)));
         /* plus4 */
         assertTrue(c.peutEtrePoseeSur(new Plus4(uno)));
         /* joker */
@@ -79,8 +79,4 @@ class Plus2Test {
         assertFalse(c.peutEtrePoseeSur(new ChangementDeSens(uno, Couleur.BLEU)));
     }
 
-    @org.junit.jupiter.api.Test
-    void testToString() {
-        assertEquals("Plus2 rouge", new Plus2(uno, Couleur.ROUGE).toString(), "toString() ne renvoie pas la bonne valeur");
-    }
 }

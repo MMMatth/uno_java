@@ -1,8 +1,11 @@
 package uno.cartes;
 import uno.jeu.Uno;
 
+/**
+ * @brief singleton qui permet de créer des paquets de cartes
+ */
 public class FabriqueCartes {
-    private static FabriqueCartes instance;
+    private static FabriqueCartes instance; // instance unique de la fabrique
 
     public static FabriqueCartes getInstance() {
         if (instance == null) {
@@ -11,17 +14,25 @@ public class FabriqueCartes {
         return instance;
     }
 
+    /**
+     * @brief fonction qui permet de créer un paquet de cartes vide
+     */
     public PaquetDeCartes getPaquetVide() {
         return new PaquetDeCartes();
     }
 
+    /**
+     * @brief fonction qui permet de créer un paquet de cartes entier
+     */
     public PaquetDeCartes getPaquetEntier() {
         PaquetDeCartes paquet = new PaquetDeCartes();
         Uno u = new Uno();
+        // 4 cartes 0 de chaque couleur
         paquet.ajouter(new Chiffre(u, Couleur.BLEU, 0));
         paquet.ajouter(new Chiffre(u, Couleur.JAUNE, 0));
         paquet.ajouter(new Chiffre(u, Couleur.ROUGE, 0));
         paquet.ajouter(new Chiffre(u, Couleur.VERT, 0));
+        // 2 cartes de chaque chiffre de chaque couleur
         for (int j = 0; j < 2; j ++){
             for (int i = 1; i < 10; i++) {
                 paquet.ajouter(new Chiffre(u, Couleur.BLEU, i));
@@ -56,12 +67,18 @@ public class FabriqueCartes {
         return paquet;
     }
 
+    /**
+     * @brief fonction qui permet de créer un paquet de cartes entier et de le mélanger
+     */
     public PaquetDeCartes getPaquetMelangerEntier() {
         PaquetDeCartes paquet = getPaquetEntier();
         paquet.melanger();
         return paquet;
     }
 
+    /**
+     * @brief fonction qui permet de créer un paquet de cartes avec les chiffres rouges
+     */
     public PaquetDeCartes getChiffreRouge(){
         PaquetDeCartes paquet = new PaquetDeCartes();
         Uno u = new Uno();

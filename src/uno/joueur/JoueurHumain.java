@@ -4,11 +4,26 @@ import uno.jeu.Uno;
 import uno.cartes.*;
 import uno.cartes.PaquetDeCartes;
 
+/**
+ * @brief Classe représentant un joueur humain
+ */
 public class JoueurHumain extends Joueur{
+
+    /**
+     * @brief Constructeur de la classe JoueurHumain
+     * @param uno Référence vers le jeu de Uno
+     * @param nom Nom du joueur
+     * @param id Id du joueur
+     */
     public JoueurHumain(Uno uno, String nom, int id) {
         super(uno, nom, id);
     }
 
+    /**
+     * @brief fonction qui permet de recuper la couleur par rapport a la lettre (r, b, v, j)
+     * @param couleur la couleur sous forme de lettre (r, b, v, j)
+     * @return la couleur ou null si la couleur n'est pas bonne
+     */
     public Couleur choisirCouleur(String couleur){
         return switch (couleur) {
             case "r" -> Couleur.ROUGE;
@@ -72,38 +87,38 @@ public class JoueurHumain extends Joueur{
                 throw (new CoupIncorrect("Carte incorrecte pour le coup joué"));
         }
     }
-    public void jouer(String coup) {
+
+    /**
+     * @brief fonction qui permet de jouer un coup
+     * @param coup coup joué par le joueur sur la forme c.1.r p4 p2.r
+     * @throws CoupIncorrect si le coup est incorrect (carte incorrecte, couleur incorrecte, pas present dans la main)
+     */
+    public void jouer(String coup) throws CoupIncorrect{
         boolean rejouer = false;
+
         if (coup.equals("p")) {
             this.piocher();
         } else {
             try {
-                try {
-                    Carte carteVoulue = carteChoisie(coup);
-                    Carte sommetTalon = this.uno.getTalon().getSommet();
-                    if (this.main.contient(carteVoulue) ) {
-                        if (sommetTalon.peutEtreRecouvertePar(carteVoulue)) {
-                            carteVoulue.appliquerEffet();
-                            this.uno.addToTalon(carteVoulue);
-                            main.enlever(carteVoulue);
-                        }else {
-                            throw (new CoupIncorrect("Carte non jouable sur le talon"));
-                        }
-                    }
-                    else {
-                        throw (new CoupIncorrect("Carte non présente dans la main"));
-                    }
-                }
-                catch (CoupIncorrect e){
-                    throw (new CoupIncorrect("Carte incorrecte"));
+                Carte carteVoulue = carteChoisie(coup);
+                Carte sommetTalon = this.uno.getTalon().getSommet();
+
+                if (this.main.contient(carteVoulue) && sommetTalon.peutEtreRecouvertePar(carteVoulue)) {
+                    carteVoulue.appliquerEffet();
+                    this.uno.addToTalon(carteVoulue);
+                    main.enlever(carteVoulue);
+                } else {
+                    throw new CoupIncorrect("Carte incorrecte");
                 }
             } catch (CoupIncorrect e) {
                 rejouer = true;
                 System.out.println(e.getMessage());
             }
         }
+
         if (rejouer) {
             this.uno.joueurRejoue();
         }
     }
+
 }
