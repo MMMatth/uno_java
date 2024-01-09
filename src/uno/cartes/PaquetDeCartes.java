@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * @brief Classe représentant un paquet de cartes
  * */
-public class PaquetDeCartes implements Iterator<Carte>{
+public abstract class PaquetDeCartes extends Carte implements Iterator<Carte>{
     private final ArrayList<Carte> paquet; /** < Liste des cartes du paquet */
     private int index; /** < Index de l'itérateur */
     /**
