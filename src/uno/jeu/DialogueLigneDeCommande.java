@@ -3,6 +3,7 @@ package uno.jeu;
 import uno.cartes.Carte;
 import uno.joueur.CoupIncorrect;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class DialogueLigneDeCommande {
@@ -56,8 +57,13 @@ public class DialogueLigneDeCommande {
      */
     public String choisirCouleur(String coup){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Veuillez choisir une couleur : " + rouge + "r" + reset + ", " + vert + "v" + reset + ", " + jaune + "j" + reset + ", " + bleu + "b" + reset);
-        String couleur = sc.next();
+        String couleur;
+        do {
+            System.out.println("Veuillez choisir une couleur : " + rouge + "r" + reset + ", " + vert + "v" + reset +
+                    ", " + jaune + "j" + reset + ", " + bleu + "b" + reset);
+            couleur = sc.next();
+        }while (!Objects.equals(couleur, "r") && !Objects.equals(couleur, "v") &&
+                !Objects.equals(couleur, "j") && !Objects.equals(couleur, "b"));
         coup = coup + "." + couleur;
         return coup;
     }
