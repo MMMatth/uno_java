@@ -1,7 +1,11 @@
 package uno.cartes;
 import uno.jeu.Uno;
 
-
+/**
+ * Carte Plus2 dans le jeu Uno
+ * @see uno.cartes.Carte
+ * @author GAUDEL Matthieu
+ */
 public class Plus2 extends Carte{
     @Override
     public int getValeur() {

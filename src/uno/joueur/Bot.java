@@ -3,14 +3,14 @@ package uno.joueur;
 import uno.jeu.Uno;
 
 /**
- * @brief Classe représentant un joueur bot
+ *   Classe représentant un joueur bot
  * @author Matthieu GAUDEL
  */
 public class Bot extends Joueur{
     private final Strategie strategie; // Stratégie du bot
 
     /**
-     * @brief Constructeur de la classe Bot
+     *   Constructeur de la classe Bot
      * @param uno Référence vers le jeu de Uno
      * @param nom Nom du bot
      * @param id Id du bot
@@ -26,7 +26,7 @@ public class Bot extends Joueur{
     }
 
     /**
-     * @brief Fonction qui permet au bot de jouer son coup
+     *   Fonction qui permet au bot de jouer son coup
      * @param coup coup joué (pas utilisé)
      */
     public void jouer(String coup) {

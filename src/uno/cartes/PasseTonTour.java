@@ -1,7 +1,11 @@
 package uno.cartes;
 import uno.jeu.Uno;
 
-
+/**
+ * Carte PasseTonTour dans le jeu Uno
+ * @see uno.cartes.Carte
+ * @author Matthieu GAUDEL
+ */
 public class PasseTonTour extends Carte{
     public PasseTonTour(Uno u, Couleur c){
         super(u, c);

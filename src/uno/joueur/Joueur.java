@@ -5,17 +5,17 @@ import uno.jeu.Uno;
 import uno.cartes.*;
 
 /**
- * @brief Classe abstraite représentant un joueur
+ *   Classe abstraite représentant un joueur
  * @author Matthieu GAUDEL
  */
 public abstract class Joueur {
-    protected String nom; /** < Nom du joueur */
-    protected int id; /** < Id du joueur */
-    protected PaquetDeCartes main; /** < Main du joueur */
-    protected Uno uno; /** < Référence vers le jeu de Uno */
+    protected String nom;  /** Nom du joueur */
+    protected int id;  /** Id du joueur */
+    protected PaquetDeCartes main;  /** Main du joueur */
+    protected Uno uno;  /** Référence vers le jeu de Uno */
 
     /**
-     * @brief Constructeur de la classe Joueur
+     *   Constructeur de la classe Joueur
      * @param uno Référence vers le jeu de Uno
      * @param nom Nom du joueur
      * @param id Id du joueur
@@ -28,7 +28,7 @@ public abstract class Joueur {
     }
 
     /**
-     * @brief Fonction qui permet au joueur de jouer son coup
+     *   Fonction qui permet au joueur de jouer son coup
      * @param coup coup joué
      * @throws CoupIncorrect si le coup est incorrect
      */
@@ -44,21 +44,21 @@ public abstract class Joueur {
     }
 
     /**
-     * @brief fonction qui permet de piocher une carte
+     *   fonction qui permet de piocher une carte
      */
     public void piocher() {
         this.main.ajouter(this.uno.getPioche().piocher());
     }
 
     /**
-     * @brief fonction qui permet de savoir combien de cartes a le joueur
+     *   fonction qui permet de savoir combien de cartes a le joueur
      */
     public int getNombreDeCartes() {
         return this.main.getNombreDeCartes();
     }
 
     /**
-     * @brief fonction qui permet de savoir le score du joueur
+     *   fonction qui permet de savoir le score du joueur
      * @return le score du joueur
      */
     public int getScore(){
@@ -66,7 +66,7 @@ public abstract class Joueur {
     }
 
     /**
-     * @brief getter de la main du joueur
+     *   getter de la main du joueur
      * @return la main du joueur
      */
     public PaquetDeCartes getMain() {
@@ -74,7 +74,7 @@ public abstract class Joueur {
     }
 
     /**
-     * @brief fonction qui permet d'ajouter une carte a la main du joueur
+     *   fonction qui permet d'ajouter une carte a la main du joueur
      * @param c carte a ajouter
      */
     public void addCarte(Carte c){

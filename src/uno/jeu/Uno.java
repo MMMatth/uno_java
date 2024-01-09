@@ -8,27 +8,27 @@ import java.util.Random;
 
 /**
  * Class Uno
- * @brief Classe qui permet de gerer le jeu
+ *   Classe qui permet de gerer le jeu
  * @author Matthieu GAUDEL
  */
 public class Uno {
-    private int joueurQuiDistribue; /** < variable qui varie entre 0 et nbJoueurs - 1 */
+    private int joueurQuiDistribue;  /** variable qui varie entre 0 et nbJoueurs - 1 */
 
-    private int joueurQuiJoue; /** < variable qui varie entre 0 et nbJoueurs - 1 */
-    private boolean sensHoraire; /** < true si le sens est horaire, false sinon */
-    private int difficulte; /** < difficulte du jeu */
-    private PaquetDeCartes pioche; /** < pioche du jeu */
-    private PaquetDeCartes talon; /** < talon du jeu */
-    private ArrayList<Joueur> joueurs; /** < liste des joueurs */
-    private DialogueLigneDeCommande dialogue; /** < dialogue du jeu */
+    private int joueurQuiJoue;  /** variable qui varie entre 0 et nbJoueurs - 1 */
+    private boolean sensHoraire;  /** true si le sens est horaire, false sinon */
+    private int difficulte;  /** difficulte du jeu */
+    private PaquetDeCartes pioche;  /** pioche du jeu */
+    private PaquetDeCartes talon;  /** talon du jeu */
+    private ArrayList<Joueur> joueurs;  /** liste des joueurs */
+    private DialogueLigneDeCommande dialogue;  /** dialogue du jeu */
 
     /**
-     * @brief Constructeur de la classe Uno
+     *   Constructeur de la classe Uno
      */
     public Uno() {}
 
     /**
-     * @brief Fonction qui permet d'initialiser les joueurs
+     *   Fonction qui permet d'initialiser les joueurs
      * @param nbJoueurs nombre de joueurs
      * @param nomJoueur nom du joueur humain
      * @throws IllegalArgumentException si le nombre de joueurs est inferieur a 2 ou superieur a 10
@@ -48,7 +48,7 @@ public class Uno {
     }
 
     /**
-     * @brief Fonction qui permet d'initialiser le dialogue
+     *   Fonction qui permet d'initialiser le dialogue
      * @param dialogue
      */
     public void setDialogue(DialogueLigneDeCommande dialogue) {
@@ -56,14 +56,14 @@ public class Uno {
     }
 
     /**
-     * @brief Fonction qui permet de choisir le joueur qui joue en premier
+     *   Fonction qui permet de choisir le joueur qui joue en premier
      */
     public void choisirJoueurQuiJoue() {
         this.joueurQuiJoue = (joueurQuiDistribue + 1) % (joueurs.size() - 1); // le joueur qui joue est le joueur apres le joueur qui distribue
     }
 
     /**
-     * @brief Fonction qui permet de refaire jouer un joueur
+     *   Fonction qui permet de refaire jouer un joueur
      * @details Fonction qui permet de refaire jouer un joueur par exemple dans le cas ou le joueur se trompe de carte
      */
     public void joueurAvant() {
@@ -80,7 +80,7 @@ public class Uno {
     }
 
     /**
-     * @brief Fonction qui permet de choisir le joueur qui distribue
+     *   Fonction qui permet de choisir le joueur qui distribue
      * @details cette fonction utilise un random pour choisir le joueur qui distribue aleatoirement parmis les joueurs
      */
     public void chosirJoueurQuiDistribue() {
@@ -91,7 +91,7 @@ public class Uno {
 
 
     /**
-     * @brief Fonction qui permet d'initialiser la pioche
+     *   Fonction qui permet d'initialiser la pioche
      */
     public void initPioche() {
         FabriqueCartes fabriqueCartes = FabriqueCartes.getInstance();
@@ -99,7 +99,7 @@ public class Uno {
     }
 
     /**
-     * @brief Fonction qui permet d'initialiser le talon
+     *   Fonction qui permet d'initialiser le talon
      */
     public void initTalon() {
         FabriqueCartes fabriqueCartes = FabriqueCartes.getInstance();
@@ -107,7 +107,7 @@ public class Uno {
     }
 
     /**
-     * @brief Fonction qui permet de rafraichir la pioche
+     *   Fonction qui permet de rafraichir la pioche
      * @details Cette fonction permet de rafraichir la pioche dans le cas ou elle est vide
      */
     public void refreshPioche(){
@@ -121,7 +121,7 @@ public class Uno {
     }
 
     /**
-     * @brief Fonction qui permet de distribuer les cartes
+     *   Fonction qui permet de distribuer les cartes
      * @details cette fonction distribue 7 cartes a chaque joueur une par une
      */
     public void dirstribuerCarte(){
@@ -134,7 +134,7 @@ public class Uno {
     }
 
     /**
-     * @brief Fonction qui permet d'initialiser le sens du jeu
+     *   Fonction qui permet d'initialiser le sens du jeu
      * @param sensHoraire true si le sens est horaire, false sinon
      */
     public void initSenseHoraire(boolean sensHoraire){
@@ -142,7 +142,7 @@ public class Uno {
     }
 
     /**
-     * @brief Fonction qui permet d'initialiser le jeu
+     *   Fonction qui permet d'initialiser le jeu
      * @param nbrBots nombre de bots
      * @param nomJoueur nom du joueur humain
      */
@@ -159,14 +159,14 @@ public class Uno {
 
     /* Effet des cartes */
     /**
-     * @brief Fonction qui permet de changer le sens du jeu
+     *   Fonction qui permet de changer le sens du jeu
      */
     public void changerSens(){
         sensHoraire = !sensHoraire;
     }
 
     /**
-     * @brief Fonction qui permet de changer de joueur
+     *   Fonction qui permet de changer de joueur
      */
     public void changeDeJoueur(){
         if (sensHoraire){
@@ -182,7 +182,7 @@ public class Uno {
     }
 
     /**
-     * @brief Fonction qui permet de faire piocher un joueur
+     *   Fonction qui permet de faire piocher un joueur
      * @param nbCartes nombre de cartes a piocher
      */
     public void donnerCarteAuJoueurSuivant(int nbCartes) {
@@ -215,7 +215,7 @@ public class Uno {
 
 
     /**
-     * @brief Fonction qui permet de recuperer les scores des joueurs
+     *   Fonction qui permet de recuperer les scores des joueurs
      * @return La liste des scores des joueurs
      */
     public ArrayList<Integer> getScores(){
@@ -227,7 +227,7 @@ public class Uno {
     }
 
     /**
-     * @brief Fonction qui permet de savoir si le jeu est fini
+     *   Fonction qui permet de savoir si le jeu est fini
      * @return true si le jeu est fini, false sinon
      */
     public boolean estFini() {

@@ -1,20 +1,20 @@
 package uno.cartes;
 
 /**
- * @brief Enumération des couleurs des cartes
+ *   Enumération des couleurs des cartes
  * @author Matthieu GAUDEL
  */
 public enum Couleur {
 
-    JAUNE("jaune"),
-    BLEU("bleu"),
-    ROUGE("rouge"),
-    VERT("vert");
+    JAUNE("jaune"), /** la couleur jaune */
+    BLEU("bleu"), /** la couleur bleue */
+    ROUGE("rouge"), /** la couleur rouge */
+    VERT("vert"); /** la couleur verte */
 
     private String nom ; // nom de la couleur
 
     /**
-     * @brief Constructeur de la couleur
+     *   Constructeur de la couleur
      * @param nom nom de la couleur
      */
     private Couleur (String nom) {
@@ -22,7 +22,7 @@ public enum Couleur {
     }
 
     /**
-     * @brief Getter du nom de la couleur
+     *   Getter du nom de la couleur
      * @return le nom de la couleur
      */
     public String getNom() {
@@ -30,8 +30,7 @@ public enum Couleur {
     }
 
     /**
-     * @brief Fonction qui permet de récupérer la couleur à partir de son nom
-     * @param nom nom de la couleur
+     *   Fonction qui permet de récupérer la couleur à partir de son nom
      * @return la couleur
      */
     public String toString(){
@@ -39,7 +38,7 @@ public enum Couleur {
     }
 
     /**
-     * @brief Fonction qui permet de savoir si la couleur est la même que celle passée en paramètre
+     *   Fonction qui permet de savoir si la couleur est la même que celle passée en paramètre
      * @param color couleur à comparer
      * @return true si la couleur est la même, false sinon
      */

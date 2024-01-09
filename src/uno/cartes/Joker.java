@@ -1,6 +1,12 @@
 package uno.cartes;
 import uno.jeu.Uno;
 import java.util.Random;
+
+/**
+ * Carte Joker dans le jeu Uno
+ * @author Matthieu GAUDEL
+ * @see uno.cartes.Carte
+ */
 public class Joker extends Carte {
     public  Joker(Uno u) {
         super(u);

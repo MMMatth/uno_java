@@ -3,7 +3,11 @@ import uno.jeu.Uno;
 
 import java.util.Random;
 
-
+/**
+ * Carte Plus4 dans le jeu Uno
+ * @see uno.cartes.Carte
+ * @author Matthieu GAUDEL
+ */
 public class Plus4 extends Carte {
     public Plus4(Uno u) {
         super(u);

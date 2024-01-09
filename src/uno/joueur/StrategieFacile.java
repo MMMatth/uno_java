@@ -6,12 +6,12 @@ import uno.jeu.Uno;
 import java.util.Iterator;
 
 /**
- * @brief Classe définissant une stratégie de jeu facile ( dès que le bot peut jouer, il joue )
+ *   Classe définissant une stratégie de jeu facile ( dès que le bot peut jouer, il joue )
  * @author Matthieu GAUDEL
  */
 public class StrategieFacile implements Strategie {
     /**
-     * @brief Fonction qui permet au bot de jouer son coup
+     *   Fonction qui permet au bot de jouer son coup
      * @param main la main du bot
      * @param uno le jeu de uno
      * @throws Exception si le talon est vide ou si la pioche est vide

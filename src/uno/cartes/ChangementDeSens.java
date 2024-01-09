@@ -2,6 +2,11 @@ package uno.cartes;
 import uno.cartes.Couleur;
 import uno.jeu.Uno;
 
+/**
+ * Carte PasseTonTour
+ * @author Matthieu GAUDEL
+ * @see uno.cartes.Carte
+ */
 public class ChangementDeSens extends Carte{
     public ChangementDeSens(Uno u, Couleur c){
         super(u, c);

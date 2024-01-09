@@ -5,13 +5,13 @@ import uno.cartes.*;
 import uno.cartes.PaquetDeCartes;
 
 /**
- * @brief Classe représentant un joueur humain
+ *   Classe représentant un joueur humain
  * @author Matthieu GAUDEL
  */
 public class JoueurHumain extends Joueur{
 
     /**
-     * @brief Constructeur de la classe JoueurHumain
+     *   Constructeur de la classe JoueurHumain
      * @param uno Référence vers le jeu de Uno
      * @param nom Nom du joueur
      * @param id Id du joueur
@@ -21,7 +21,7 @@ public class JoueurHumain extends Joueur{
     }
 
     /**
-     * @brief fonction qui permet de recuper la couleur par rapport a la lettre (r, b, v, j)
+     *   fonction qui permet de recuper la couleur par rapport a la lettre (r, b, v, j)
      * @param couleur la couleur sous forme de lettre (r, b, v, j)
      * @return la couleur ou null si la couleur n'est pas bonne
      */
@@ -90,7 +90,7 @@ public class JoueurHumain extends Joueur{
     }
 
     /**
-     * @brief fonction qui permet de jouer un coup
+     *   fonction qui permet de jouer un coup
      * @param coup coup joué par le joueur sur la forme c.1.r p4 p2.r
      * @throws CoupIncorrect si le coup est incorrect (carte incorrecte, couleur incorrecte, pas present dans la main)
      */

@@ -7,24 +7,24 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * @brief Classe qui permet de gérer le dialogue avec le joueur humain
+ *   Classe qui permet de gérer le dialogue avec le joueur humain
  * @author Matthieu GAUDEL
  */
 public class DialogueLigneDeCommande {
-    private Uno uno; /** < L'instance de Uno */
+    private Uno uno;  /** L'instance de Uno */
 
     /* Couleurs pour le terminal */
 
-    private final String reset = "\u001B[0m"; /** < Couleur par défaut */
-    private final String souligne = "\u001B[4m"; /** < Couleur soulignée */
-    private final String gras = "\u001B[1m"; /** < Couleur en gras */
-    private final String rouge = "\u001B[31m"; /** < Couleur rouge */
-    private final String vert = "\u001B[32m"; /** < Couleur verte */
-    private final String jaune = "\u001B[33m"; /** < Couleur jaune */
-    private final String bleu = "\u001B[34m"; /** < Couleur bleue */
+    private final String reset = "\u001B[0m";  /** Couleur par défaut */
+    private final String souligne = "\u001B[4m";  /** Couleur soulignée */
+    private final String gras = "\u001B[1m";  /** Couleur en gras */
+    private final String rouge = "\u001B[31m";  /** Couleur rouge */
+    private final String vert = "\u001B[32m";  /** Couleur verte */
+    private final String jaune = "\u001B[33m";  /** Couleur jaune */
+    private final String bleu = "\u001B[34m";  /** Couleur bleue */
 
     /**
-     * @brief Constructeur de la classe DialogueLigneDeCommande
+     *   Constructeur de la classe DialogueLigneDeCommande
      * @param u instance de Uno
      */
     public DialogueLigneDeCommande(Uno u) {
@@ -55,7 +55,7 @@ public class DialogueLigneDeCommande {
     }
 
     /**
-     * @brief Fonction qui permet de choisir une couleur
+     *   Fonction qui permet de choisir une couleur
      * @param coup coup joué par le joueur
      * @return le coup joué par le joueur avec la couleur choisie
      */
@@ -73,7 +73,7 @@ public class DialogueLigneDeCommande {
     }
 
     /**
-     * @brief Fonction qui permet de réagir au coup joué
+     *   Fonction qui permet de réagir au coup joué
      * @details cette fonction se sépare en trois aprtie le cas ou le jeux est fini, le cas ou c'est au tour du
      * joueur humain de jouer et le cas ou c'est au tour d'un bot de jouer
      */
@@ -107,7 +107,7 @@ public class DialogueLigneDeCommande {
     }
 
     /**
-     * @brief Fonction qui permet d'afficher les scores
+     *   Fonction qui permet d'afficher les scores
      */
     private void afficherScores() {
         System.out.println(gras + souligne + "Le jeu est fini voici les scores" + reset);
@@ -117,7 +117,7 @@ public class DialogueLigneDeCommande {
     }
 
     /**
-     * @brief Fonction qui permet au joueur humain de jouer son coup
+     *   Fonction qui permet au joueur humain de jouer son coup
      * @throws CoupIncorrect si le coup est incorrect (mauvaise couleur, mauvais chiffre, ...)
      */
     private void jouerCarteHumain() throws CoupIncorrect {
@@ -132,7 +132,7 @@ public class DialogueLigneDeCommande {
     }
 
     /**
-     * @brief Fonction qui permet au bot de jouer son coup
+     *   Fonction qui permet au bot de jouer son coup
      * @throws CoupIncorrect si le coup est incorrect (mauvaise couleur, mauvais chiffre, ...)
      */
     private void jouerCarteBot() throws CoupIncorrect {

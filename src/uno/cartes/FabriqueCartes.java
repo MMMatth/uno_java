@@ -2,7 +2,7 @@ package uno.cartes;
 import uno.jeu.Uno;
 
 /**
- * @brief singleton qui permet de créer des paquets de cartes
+ *   singleton qui permet de créer des paquets de cartes
  * @author Matthieu GAUDEL
  */
 public class FabriqueCartes {
@@ -16,14 +16,14 @@ public class FabriqueCartes {
     }
 
     /**
-     * @brief fonction qui permet de créer un paquet de cartes vide
+     *   fonction qui permet de créer un paquet de cartes vide
      */
     public PaquetDeCartes getPaquetVide() {
         return new PaquetDeCartes();
     }
 
     /**
-     * @brief fonction qui permet de créer un paquet de cartes entier
+     *   fonction qui permet de créer un paquet de cartes entier
      */
     public PaquetDeCartes getPaquetEntier() {
         PaquetDeCartes paquet = new PaquetDeCartes();
@@ -69,7 +69,7 @@ public class FabriqueCartes {
     }
 
     /**
-     * @brief fonction qui permet de créer un paquet de cartes entier et de le mélanger
+     *   fonction qui permet de créer un paquet de cartes entier et de le mélanger
      */
     public PaquetDeCartes getPaquetMelangerEntier() {
         PaquetDeCartes paquet = getPaquetEntier();
@@ -78,7 +78,7 @@ public class FabriqueCartes {
     }
 
     /**
-     * @brief fonction qui permet de créer un paquet de cartes avec les chiffres rouges
+     *   fonction qui permet de créer un paquet de cartes avec les chiffres rouges
      */
     public PaquetDeCartes getChiffreRouge(){
         PaquetDeCartes paquet = new PaquetDeCartes();

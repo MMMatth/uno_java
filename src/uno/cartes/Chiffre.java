@@ -1,7 +1,11 @@
 package uno.cartes;
 import uno.jeu.Uno;
 
-
+/**
+ * Carte Chiffre (0-9) de couleur (rouge, bleu, vert, jaune) dans le jeu Uno
+ * @author Matthieu GAUDEL
+ * @see uno.cartes.Carte
+ */
 public class Chiffre extends Carte{
     private  int valeur;
 

@@ -7,14 +7,14 @@ import uno.jeu.Uno;
 import java.util.Iterator;
 
 /**
- * @brief Classe qui définit la stratégie difficile ( le bot joue la carte qui a le plus gros score
+ *   Classe qui définit la stratégie difficile ( le bot joue la carte qui a le plus gros score
  * pour avoir le moins de points possible )
  * @author Matthieu GAUDEL
  */
 public class StrategieDifficile implements Strategie {
 
     /**
-     * @brief Fonction qui permet au bot de jouer son coup
+     *   Fonction qui permet au bot de jouer son coup
      * @details le bot joue la carte qui a le plus gros score pour avoir le moins de points possible
      * @param main la main du bot
      * @param uno le jeu de uno
