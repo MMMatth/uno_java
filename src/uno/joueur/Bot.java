@@ -4,6 +4,7 @@ import uno.jeu.Uno;
 
 /**
  * @brief Classe représentant un joueur bot
+ * @author Matthieu GAUDEL
  */
 public class Bot extends Joueur{
     private final Strategie strategie; // Stratégie du bot

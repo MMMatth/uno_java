@@ -11,7 +11,8 @@ import java.util.Scanner;
 
 /**
  * @brief Classe représentant un paquet de cartes
- * */
+ * @author Matthieu GAUDEL
+ */
 public class PaquetDeCartes implements Iterator<Carte>{
     private final ArrayList<Carte> paquet; /** < Liste des cartes du paquet */
     private int index; /** < Index de l'itérateur */

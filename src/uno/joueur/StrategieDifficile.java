@@ -9,6 +9,7 @@ import java.util.Iterator;
 /**
  * @brief Classe qui définit la stratégie difficile ( le bot joue la carte qui a le plus gros score
  * pour avoir le moins de points possible )
+ * @author Matthieu GAUDEL
  */
 public class StrategieDifficile implements Strategie {
 

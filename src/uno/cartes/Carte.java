@@ -3,6 +3,7 @@ import uno.jeu.Uno;
 
 /**
  * @brief Classe abstraite représentant une carte du jeu de Uno
+ * @author Matthieu GAUDEL
  */
 public abstract class Carte {
     protected Uno u; /** < Référence vers le jeu de Uno */

@@ -6,6 +6,7 @@ import uno.cartes.PaquetDeCartes;
 
 /**
  * @brief Classe représentant un joueur humain
+ * @author Matthieu GAUDEL
  */
 public class JoueurHumain extends Joueur{
 

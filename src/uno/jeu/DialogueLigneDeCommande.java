@@ -6,6 +6,10 @@ import uno.joueur.CoupIncorrect;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * @brief Classe qui permet de gérer le dialogue avec le joueur humain
+ * @author Matthieu GAUDEL
+ */
 public class DialogueLigneDeCommande {
     private Uno uno; /** < L'instance de Uno */
 
@@ -79,7 +83,7 @@ public class DialogueLigneDeCommande {
         } else {
             uno.refreshPioche();
             System.out.println(gras + souligne + "C'est au tour de " +
-                    uno.getJoueur(uno.getJoueurQuiJoue()).getNom() + " de jouer" +
+                    uno.getJoueur(uno.getJoueurQuiJoue()).getNom() + " de jouer " +
                     "il a " + uno.getJoueur(uno.getJoueurQuiJoue()).getNombreDeCartes() + " cartes" +
                     reset);
 

@@ -2,6 +2,7 @@ package uno.cartes;
 
 /**
  * @brief Enumération des couleurs des cartes
+ * @author Matthieu GAUDEL
  */
 public enum Couleur {
 

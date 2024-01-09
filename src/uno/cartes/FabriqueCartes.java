@@ -3,6 +3,7 @@ import uno.jeu.Uno;
 
 /**
  * @brief singleton qui permet de créer des paquets de cartes
+ * @author Matthieu GAUDEL
  */
 public class FabriqueCartes {
     private static FabriqueCartes instance; // instance unique de la fabrique

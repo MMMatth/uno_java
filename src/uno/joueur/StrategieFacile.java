@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 /**
  * @brief Classe définissant une stratégie de jeu facile ( dès que le bot peut jouer, il joue )
+ * @author Matthieu GAUDEL
  */
 public class StrategieFacile implements Strategie {
     /**

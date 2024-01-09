@@ -6,6 +6,7 @@ import uno.cartes.*;
 
 /**
  * @brief Classe abstraite représentant un joueur
+ * @author Matthieu GAUDEL
  */
 public abstract class Joueur {
     protected String nom; /** < Nom du joueur */
